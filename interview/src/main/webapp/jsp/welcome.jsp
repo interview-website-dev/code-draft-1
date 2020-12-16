@@ -7,7 +7,8 @@
 <title>Welcome</title>
 </head>
 <body>
-	<table>
+<h3 align="right"><a href="jsp/dashboard.jsp">Welcome ${firstname}</a></h3>
+	<%-- <table>
 		<tr>
 			<td>Welcome ${firstname}</td>
 		</tr>
@@ -18,6 +19,6 @@
 		<tr>
 			<td><a href="home.jsp">Home</a></td>
 		</tr>
-	</table>
+	</table> --%>
 </body>
 </html>
