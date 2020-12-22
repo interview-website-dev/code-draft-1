@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Forgot Password</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1>FORGOT PASSWORD</h1>
+<h1>Password change success!!!</h1>
+<a href="login">Go to login</a>
 </body>
 </html>

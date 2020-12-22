@@ -17,17 +17,33 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
-function logform() { 
-	var lo = document.forms["loginForm"]["companyemailid"].value;
+function newpassform() { 
+	var lo = document.forms["forgotpasswordform"]["companyemailid"].value;
 	  if (lo == "") {
 	    alert("Please enter company email Id");
-	    return false;}
-	  
+	    
+	    return false;};
+	  //PASSWORD
+		  var p = document.forms["forgotpasswordform"]["password"].value;
+		  if (p == "") {
+		    alert("Password Cannot Be Empty");
+		    return false;
+		    }
+		  if((p.length <= 5) || (p.length > 20)){
+			  alert("Password should be between 5 and 20");
+			  return false;
+		  }
+		  //CONFIRMPASSWORD
+		  var cp = document.forms["forgotpasswordform"]["confirmpassword"].value;
+		  if(p!=cp){
+			  alert("Password didnt match");
+			  return false;
+		  }
 }</script>
 </head>
 <body>
 
-	<form:form id="loginForm" modelAttribute="login" action="loginProcess" onsubmit="return logform()"
+	<form:form id="forgotpasswordform" modelAttribute="user" action="forgotpasswordProcess" onsubmit="return newpassform()"
 		method="post">
 		<table align="center">
 			<tr>
@@ -35,20 +51,21 @@ function logform() {
 				<td><form:input path="companyemailid" name="companyemailid" id="companyemailid" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="password">Password:</form:label></td>
-				<td><form:password path="password" name="password"
-						id="password" /></td>
+				<td><form:label path="password">Password</form:label></td>
+				<td><form:password path="password" name="password" id="password" /></td>
+			</tr>
+			<tr>
+				<td><form:label path="confirmpassword">ConfirmPassword</form:label></td>
+				<td><form:password path="confirmpassword" name="confirmpassword" id="confirmpassword" /></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td align="left"><form:button id="login" name="login">Login</form:button></td>
+				<td align="left"><form:button id="forgotpassword" name="forgotpassword">Save</form:button></td>
 			</tr>
 
 			<tr></tr>
 			<tr>
 				<td></td>
-				<td><a href="forgotpassword">Forget Password?</a></td>
-				<td><a href="register">New Member? Sign up now</a></td>
 			</tr>
 		</table>
 	</form:form>

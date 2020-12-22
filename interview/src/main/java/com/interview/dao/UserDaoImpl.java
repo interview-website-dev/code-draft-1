@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 
 import com.interview.model.User;
-
 import com.interview.dao.UserMapper;
 import com.interview.model.Login;
 
@@ -30,6 +29,11 @@ public class UserDaoImpl implements UserDao {
     return jdbcTemplate.update(sql, new Object[] {user.getUserid(),user.getFirstname(), user.getLastname(),user.getPassword(), user.getCompanyemailid(),
         user.getMobilenumber(), user.getCompanyname(), user.getCity()});
   }
+  public int updatepass(User user) {
+	    String sql = "update users set password ='" + user.getPassword() + "' where Companyemailid = '" + user.getCompanyemailid() + "'";
+
+	    return jdbcTemplate.update(sql);
+	  }
   public User validateUser(Login login) {
 	    String sql = "select * from users where companyemailid='" + login.getCompanyemailid() + "' and password='" + login.getPassword()
 	        + "'";
@@ -37,6 +41,13 @@ public class UserDaoImpl implements UserDao {
 
 	    return users.size() > 0 ? users.get(0) : null;
 	  }
+public User validateEmailID(User user) {
+    String sql = "select * from users where companyemailid='" + user.getCompanyemailid()
+        + "'";
+    List<User> users = jdbcTemplate.query(sql, new UserMapper());
+
+    return users.size() > 0 ? users.get(0) : null;
+  }
 }
 
 class UserMapper implements RowMapper<User> {
