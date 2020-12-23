@@ -5,24 +5,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome Page</title>
+<style>
+      body {
+        text-align: center;
+      }
+      .inputField {
+        pointer-events: none;
+      }
+     </style>
 </head>
 <body>
 <%-- <h3 align="right"><a href ="jsp/home.jsp">Back</a></h3>
 <h2 align="center">${headerMessage}</h2> --%>
-<h3 align="center">You Have Registered With The Following Info</h3>
-<table align="center" border="5px">
+<h3 align="center">User Profile</h3>
 
-<tr>
-<td>Firstname</td>
-<td>${firstname}</td>
-</tr>
+<label for="Firstname">Firstname:</label>  
+  <input type="text" id="firstname" name="firstname" value=${firstname} readonly><br><br>
+  
+<label for="Lastname">Lastname:</label>  
+  <input type="text" id="lastname" name="lastname" value=${lastname} readonly><br><br>
+  
+<label for="Companyemailid">Companyemailid:</label>  
+  <input type="text" id="companyemailid" name="companyemailid" value=${companyemailid} readonly><br><br>
+  
+<label for="Mobilenumber">MobileNumber:</label>  
+  <input type="text" id="mobilenumber" name="mobilenumber" value=${mobilenumber} readonly><br><br>
+  
+<label for="Companyname">CompanyName:</label>  
+  <input type="text" id="companyname" name="companyname" value=${companyname} readonly><br><br>
+  
+<label for="City">City:</label>  
+  <input type="text" id="city" name="city" value=${city} readonly><br><br>
+  
 
-<tr>
-<td>Lastname</td>
-<td>${lastname}</td>
-</tr>
 
-<tr>
+
+<%-- <tr>
 <td>Company email id</td>
 <td>${companyemailid}</td>
 </tr>
@@ -41,7 +59,7 @@
 <td>City</td>
 <td>${city}</td>
 </tr>
-<%-- </table>
+</table>
 	<table>
 		<tr>
 			<td>Welcome ${firstname}</td>
@@ -53,11 +71,11 @@
 		<tr>
 		</tr>
 		<tr>
-		</tr> --%>
+		</tr>
 		<tr>
 			</tr>
 	</table>
-	<a href="home.jsp">Home</a>
+	<a href="home.jsp">Home</a> --%>
 		
 </body>
 </html>
