@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE tiles-definitions PUBLIC  
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"  
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">  
+<tiles-definitions>  
+    <definition name="base.definition"  
+        template="/WEB-INF/layout/layout.jsp">  
+        <put-attribute name="title" value="" />  
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />  
+        <!-- <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />  --> 
+        <put-attribute name="body" value="" />  
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />  
+    </definition>
+    <definition name="login.definition"  
+        template="/WEB-INF/layout/loginlayout.jsp">  
+        <put-attribute name="title" value="" />     
+        <put-attribute name="body" value="" />  
+    </definition>  
+    <definition name="login" extends="login.definition">  
+        <put-attribute name="title" value="Welcome login" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />  
+    </definition>  
+  
+    <definition name="registerpage" extends="base.definition">  
+        <put-attribute name="title" value="Welcome regis" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />  
+    </definition>
+    <definition name="regsu" extends="base.definition">  
+        <put-attribute name="title" value="Welcome regis" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/regsu.jsp" />  
+    </definition>
+    <definition name="forgotpassword" extends="base.definition">  
+        <put-attribute name="title" value="Welcome forgotpassword" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/forgotpassword.jsp" />  
+    </definition>
+    <definition name="passchangesuccess" extends="base.definition">  
+        <put-attribute name="title" value="Welcome forgotpassword" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/passchangesuccess.jsp" />  
+    </definition>
+    <definition name="dashboard" extends="base.definition">  
+        <put-attribute name="title" value="Welcome regis" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/dashboard.jsp" />  
+    </definition>
+    <definition name="profile" extends="base.definition">  
+        <put-attribute name="title" value="Welcome regis" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/profile.jsp" />  
+    </definition>
+  
+</tiles-definitions>  

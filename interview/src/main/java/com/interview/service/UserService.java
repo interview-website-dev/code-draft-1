@@ -12,4 +12,5 @@ public interface UserService {
   User displayUser(String mailid);
   User validateEmailID(User user);
   int updatepass(User user);
+  int updateuser(User user,String companyMailId);
 }

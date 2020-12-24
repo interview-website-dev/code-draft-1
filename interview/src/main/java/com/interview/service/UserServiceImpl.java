@@ -28,5 +28,8 @@ public class UserServiceImpl implements UserService {
 public int updatepass(User user) {
 	    return userDao.updatepass(user);
 	  }
+public int updateuser(User user,String companyMailId) {
+    return userDao.updateuser(user,companyMailId);
+  }
 
 }

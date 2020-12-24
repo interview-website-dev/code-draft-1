@@ -35,6 +35,12 @@ public class UserDaoImpl implements UserDao {
 
 	    return jdbcTemplate.update(sql);
 	  }
+  public int updateuser(User user,String companyMailId) {
+	    String sql = "update users set firstname ='" + user.getFirstname() + "',lastname ='"+user.getLastname()+"',companyemailid ='"+user.getCompanyemailid()+"',mobilenumber ='"+user.getMobilenumber()+"',companyname ='"+user.getCompanyname()+"',city ='"+user.getCity()+"' where Companyemailid ='" + companyMailId + "'";
+
+	    return jdbcTemplate.update(sql);
+	  }
+  
   public User validateUser(Login login) {
 	    String sql = "select * from users where companyemailid='" + login.getCompanyemailid() + "' and password='" + login.getPassword()
 	        + "'";

@@ -17,55 +17,52 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
-function newpassform() { 
-	var lo = document.forms["forgotpasswordform"]["companyemailid"].value;
+function logform() { 
+	var lo = document.forms["loginForm"]["companyemailid"].value;
 	  if (lo == "") {
 	    alert("Please enter company email Id");
-	    
-	    return false;};
-	  //PASSWORD
-		  var p = document.forms["forgotpasswordform"]["password"].value;
-		  if (p == "") {
-		    alert("Password Cannot Be Empty");
-		    return false;
-		    }
-		  if((p.length <= 5) || (p.length > 20)){
-			  alert("Password should be between 5 and 20");
-			  return false;
-		  }
-		  //CONFIRMPASSWORD
-		  var cp = document.forms["forgotpasswordform"]["confirmpassword"].value;
-		  if(p!=cp){
-			  alert("Password didnt match");
-			  return false;
-		  }
+	    return false;}
+	  
 }</script>
+<style>
+      body {
+      background-color:rgba(173, 216, 230,0.3)
+      
+      }
+     </style>
+
 </head>
 <body>
+<br><br><br>
+<center>
 
-	<form:form id="forgotpasswordform" modelAttribute="user" action="forgotpasswordProcess" onsubmit="return newpassform()"
+
+<h4 style="text-align: center;">Login Page</h4>
+	<form:form id="loginForm" modelAttribute="login" action="loginProcess" onsubmit="return logform()"
 		method="post">
 		<table align="center">
 			<tr>
-				<td><form:label path="companyemailid">Companyemailid: </form:label></td>
+				<td><form:label path="companyemailid">Username: </form:label></td>
+				<td>  </td>
 				<td><form:input path="companyemailid" name="companyemailid" id="companyemailid" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="password">Password</form:label></td>
-				<td><form:password path="password" name="password" id="password" /></td>
+				<td><form:label path="password">Password:</form:label></td>
+				<td>    </td>
+				<td><form:password path="password" name="password"
+						id="password" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="confirmpassword">ConfirmPassword</form:label></td>
-				<td><form:password path="confirmpassword" name="confirmpassword" id="confirmpassword" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td align="left"><form:button id="forgotpassword" name="forgotpassword">Save</form:button></td>
+				<td>  </td>
+				<td>  </td>
+				<td align="left"><br><form:button id="login" name="login" style="background-color:Cyan">Login</form:button></td>
 			</tr>
 
 			<tr></tr>
 			<tr>
-				<td></td>
+				<td><br><a href="forgotpassword">Forget Password?   </a><br></td>
+				<td>   </td>
+				<td><br><a href="register">   New Member? Sign up now</a></td>
 			</tr>
 		</table>
 	</form:form>
@@ -74,6 +71,6 @@ function newpassform() {
 			<td style="font-style: italic; color: red;">${message}</td>
 		</tr>
 	</table>
-
+</center>
 </body>
 </html>

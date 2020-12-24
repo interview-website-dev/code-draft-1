@@ -5,9 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,11 +16,28 @@ import com.interview.model.User;
 import com.interview.service.UserService;
 
 @Controller
-public class LoginController {
-
+public class UserController {
   @Autowired
-  UserService userService;
+  public UserService userService;
 
+  @RequestMapping(value = "/register", method = RequestMethod.GET)
+  public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
+    ModelAndView mav = new ModelAndView("registerpage");
+    mav.addObject("user", new User());
+
+    return mav;
+  }
+
+  @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
+  public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response,
+      @ModelAttribute("user") User user) {
+
+    userService.register(user);
+
+    return new ModelAndView("regsu", "firstname", user.getFirstname());
+    
+  }
+  
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
     ModelAndView mav = new ModelAndView("login");
@@ -81,7 +96,9 @@ public class LoginController {
     User user1 = userService.displayUser(companyMailId);
    
     if (null != user1) {
+    	
       mav = new ModelAndView("profile");
+      mav.addObject("user", new User());
       mav.addObject("firstname",user1.getFirstname());
       mav.addObject("lastname", user1.getLastname());
       mav.addObject("companyemailid", user1.getCompanyemailid());
@@ -96,6 +113,18 @@ public class LoginController {
   
   return mav;
   }
+ 
+ @RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
+ public ModelAndView updateProcess(HttpServletRequest request, HttpServletResponse response,
+     @ModelAttribute("user") User user,@RequestParam("companyMailId") String companyMailId) {
+   ModelAndView mavp = null; 
+System.out.println("hi"+user.getCompanyemailid());
+     userService.updateuser(user,companyMailId);
+     companyMailId=user.getCompanyemailid();
+     mavp = new ModelAndView("profile");
+
+   return mavp;
+ }
  @RequestMapping(value = "/forgotpassword", method = RequestMethod.GET)
  public ModelAndView showForgotPassword(HttpServletRequest request, HttpServletResponse response) {
    ModelAndView mavp = new ModelAndView("forgotpassword");
@@ -108,6 +137,8 @@ public class LoginController {
  public ModelAndView forgotpasswordProcess(HttpServletRequest request, HttpServletResponse response,
      @ModelAttribute("user") User user) {
    ModelAndView mavp = null;
+   
+  
    
 System.out.println("hi"+user.getCompanyemailid());
    User user1 = userService.validateEmailID(user);
