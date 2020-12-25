@@ -144,7 +144,7 @@ System.out.println("hi"+user.getCompanyemailid());
    User user1 = userService.validateEmailID(user);
 
    if (null != user1) {
-     mavp = new ModelAndView("Passchangesuccess");
+     mavp = new ModelAndView("passchangesuccess");
      userService.updatepass(user);
    } 
    else {

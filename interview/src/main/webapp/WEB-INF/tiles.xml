@@ -20,7 +20,14 @@
         <put-attribute name="title" value="Welcome login" />  
         <put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />  
     </definition>  
-  
+  <definition name="dashboard.definition"  
+        template="/WEB-INF/layout/dashboardlayout.jsp">  
+        <put-attribute name="title" value="" />  
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />  
+        <!-- <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />  --> 
+        <put-attribute name="body" value="" />  
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />  
+    </definition>
     <definition name="registerpage" extends="base.definition">  
         <put-attribute name="title" value="Welcome regis" />  
         <put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />  
@@ -35,9 +42,9 @@
     </definition>
     <definition name="passchangesuccess" extends="base.definition">  
         <put-attribute name="title" value="Welcome forgotpassword" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/passchangesuccess.jsp" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/Passchangesuccess.jsp" />  
     </definition>
-    <definition name="dashboard" extends="base.definition">  
+    <definition name="dashboard" extends="dashboard.definition">  
         <put-attribute name="title" value="Welcome regis" />  
         <put-attribute name="body" value="/WEB-INF/jsp/dashboard.jsp" />  
     </definition>
@@ -45,5 +52,8 @@
         <put-attribute name="title" value="Welcome regis" />  
         <put-attribute name="body" value="/WEB-INF/jsp/profile.jsp" />  
     </definition>
-  
+  <definition name="Logoutsuccess" extends="base.definition">  
+        <put-attribute name="title" value="Welcome Logout" />  
+        <put-attribute name="body" value="/WEB-INF/jsp/Logoutsuccess.jsp" />  
+    </definition>
 </tiles-definitions>  

@@ -5,26 +5,52 @@
 <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.dropbtn {
+  background-color:blue;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: blue;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color:Cyan;color: black;}
+</style>
 </head>
 <body>
-<form:form id="loginForm" modelAttribute="user" method="post">
- <h3 align="right"> <a href="profile?companyMailId=${companyemailid}">Welcome ${firstname}</a></h3>
- </form:form>
-            
+<div class="dropdown">
+  <button class="dropbtn">Welcome ${firstname}</button>
+  <div class="dropdown-content">
+    <a href="profile?companyMailId=${companyemailid}">Go to profile</a>
+    <a href="Logoutsuccess">Log out</a>
+  </div>
+</div>
 
-	<%-- <table>
-		<tr>
-			<td>Welcome ${firstname}</td>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-		</tr>
-		<tr>
-			<td><a href="home.jsp">Home</a></td>
-		</tr>
-	</table> --%>
 </body>
 </html>
