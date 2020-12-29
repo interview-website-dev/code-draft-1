@@ -20,14 +20,6 @@
         <put-attribute name="title" value="Welcome login" />  
         <put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />  
     </definition>  
-  <definition name="dashboard.definition"  
-        template="/WEB-INF/layout/dashboardlayout.jsp">  
-        <put-attribute name="title" value="" />  
-        <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />  
-        <!-- <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />  --> 
-        <put-attribute name="body" value="" />  
-        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />  
-    </definition>
     <definition name="registerpage" extends="base.definition">  
         <put-attribute name="title" value="Welcome regis" />  
         <put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />  
@@ -44,7 +36,7 @@
         <put-attribute name="title" value="Welcome forgotpassword" />  
         <put-attribute name="body" value="/WEB-INF/jsp/Passchangesuccess.jsp" />  
     </definition>
-    <definition name="dashboard" extends="dashboard.definition">  
+    <definition name="dashboard" extends="base.definition">  
         <put-attribute name="title" value="Welcome regis" />  
         <put-attribute name="body" value="/WEB-INF/jsp/dashboard.jsp" />  
     </definition>

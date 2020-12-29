@@ -18,6 +18,7 @@
 .dropdown {
   position: relative;
   display: inline-block;
+  float:right;
 }
 
 .dropdown-content {
@@ -35,7 +36,6 @@
   text-decoration: none;
   display: block;
 }
-
 .dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block;}
@@ -44,13 +44,23 @@
 </style>
 </head>
 <body>
+
 <div class="dropdown">
-  <button class="dropbtn">Welcome ${firstname}</button>
+
+  <button class="dropbtn">${firstname}</button>
   <div class="dropdown-content">
-    <a href="profile?companyMailId=${companyemailid}">Go to profile</a>
+ 
+    <a href="profile?companyMailId=${companyemailid}">profile</a>
     <a href="Logoutsuccess">Log out</a>
+    
+    
   </div>
+ 
 </div>
+ <h2> You do not have posted any job. Would you like to post a new Job</h2>
+ <center><button class="dropbtn">Post a job</button></center>
+  
+
 
 </body>
 </html>

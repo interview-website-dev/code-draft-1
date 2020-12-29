@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Logout success!!!</h1>
-<a href="login">Go to login</a>
+<h3 align="center">Thank you for using the portal.<br><br>In case you may wish to login again. <a href="login">Click here</a></h3>
+
 </body>
 </html>

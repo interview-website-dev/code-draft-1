@@ -16,6 +16,12 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<style>
+h5 {
+  color: red;
+}
+</style>
+
 <script>
 function newpassform() { 
 	var lo = document.forms["forgotpasswordform"]["companyemailid"].value;
@@ -29,8 +35,8 @@ function newpassform() {
 		    alert("Password Cannot Be Empty");
 		    return false;
 		    }
-		  if((p.length <= 5) || (p.length > 20)){
-			  alert("Password should be between 5 and 20");
+		  if((p.length <= 8) || (p.length > 20)){
+			  alert("Password should be between 8 and 20");
 			  return false;
 		  }
 		  //CONFIRMPASSWORD
@@ -46,7 +52,7 @@ function newpassform() {
 
 	<form:form id="forgotpasswordform" modelAttribute="user" action="forgotpasswordProcess" onsubmit="return newpassform()"
 		method="post">
-		<table align="center">
+		<h5><br><br>${message}</h5><br><table align="center">
 			<tr>
 				<td><form:label path="companyemailid">Companyemailid: </form:label></td>
 				<td><form:input path="companyemailid" name="companyemailid" id="companyemailid" /></td>

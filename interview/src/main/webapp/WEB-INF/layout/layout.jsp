@@ -14,7 +14,7 @@
         </tr>
         
         <tr height="540">
-            <td align="left">
+            <td style="vertical-align:top">
                     <tiles:insertAttribute name="body" />
                 </td>
         </tr>

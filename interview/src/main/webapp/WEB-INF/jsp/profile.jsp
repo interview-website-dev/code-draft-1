@@ -6,8 +6,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
 function validate() { 
+	
 	//FIRSTNAME
 	var x = document.forms["edit"]["firstname"].value;
 	  if (x == "") {
@@ -32,23 +43,6 @@ function validate() {
 			  alert("only characters are allowed in LastName");
 			  return false;
 		  }
-	  
-	  //PASSWORD
-	  var p = document.forms["edit"]["password"].value;
-	  if (p == "") {
-	    alert("Password Cannot Be Empty");
-	    return false;
-	    }
-	  if((p.length <= 5) || (p.length > 20)){
-		  alert("Password should be between 5 and 20");
-		  return false;
-	  }
-	  //CONFIRMPASSWORD
-	  var cp = document.forms["edit"]["confirmpassword"].value;
-	  if(p!=cp){
-		  alert("Password didnt match");
-		  return false;
-	  }
 	  //EMAILID
 	  var e = document.forms["edit"]["companyemailid"].value;
 	  if(e == ""){
@@ -63,6 +57,7 @@ function validate() {
 	  }
 	  //MOBILE
 	  var m = document.forms["edit"]["mobilenumber"].value;
+	 
 	  if(m== ""){
 		  alert("Mobile number cannot be empty");
 		  return false;
@@ -90,6 +85,7 @@ function validate() {
 }
 function onButtonClick(){
 	document.forms["edit"]["edit"].className="show";
+	document.getElementById("editprofile").className="hide";
 	document.forms["edit"]["firstname"].disabled=false;
 	document.forms["edit"]["lastname"].disabled=false;
 	document.forms["edit"]["companyemailid"].disabled=false;
@@ -99,9 +95,9 @@ function onButtonClick(){
 	}
 </script>
 <style>
-      body {
+      /* body {
         text-align: center;
-      }
+      } */
       .inputField {
         pointer-events: none;
       }
@@ -111,7 +107,9 @@ function onButtonClick(){
 .show{
 background-color:Cyan;
   display:block;
+  
 }
+
      </style>
 </head>
 <body>
@@ -121,7 +119,7 @@ background-color:Cyan;
 		
 <form:form id="edit" modelAttribute="user" action="updateProcess?companyMailId=${companyemailid}" onsubmit="return validate()"
 		method="post">
-		<table align="center">
+		<br><br><table align="center">
 		
 			<tr>
 				<td><form:label path="firstname">Firstname</form:label></td>
@@ -159,15 +157,17 @@ background-color:Cyan;
 			</tr>
 			<tr>
 				<td></td>
-				<td><form:button id="edit" name="edit" class="hide">Submit</form:button></td>
+				<td><br><form:button id="edit" name="edit" class="hide">Submit</form:button></td>
 			</tr>
+			
 			<tr></tr>
 			<tr>
 				<td></td>
 				
 			</tr>
 		</table>
+		
 	</form:form>
-	<center><input type="button" name="answer" value="Edit Profile" style="background-color:Cyan" onclick="onButtonClick()"/></center>
+	<center><br><input type="button" id="editprofile" name="answer" value="Edit Profile" class="show" onclick="onButtonClick()"/></center>
 </body>
 </html>

@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3 align="center">You have Successfully Registered</h3>
-<h3 align="center"><a href="home.jsp">Home</a></h3>
+<h3 align="center">Thank you for Registering with us. An email has been sent to your registered email ID. <br><br>Kindly verify with the link sent to your email to start posting jobs.
+</h3>
+
 </body>
 </html>

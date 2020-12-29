@@ -30,6 +30,11 @@ function logform() {
       
       }
      </style>
+<style>
+h5 {
+  color: red;
+}
+</style>
 
 </head>
 <body>
@@ -40,7 +45,7 @@ function logform() {
 <h4 style="text-align: center;">Login Page</h4>
 	<form:form id="loginForm" modelAttribute="login" action="loginProcess" onsubmit="return logform()"
 		method="post">
-		<table align="center">
+		<br><h5>${message}</h5><br><table align="center">
 			<tr>
 				<td><form:label path="companyemailid">Username: </form:label></td>
 				<td>  </td>
@@ -60,15 +65,15 @@ function logform() {
 
 			<tr></tr>
 			<tr>
-				<td><br><a href="forgotpassword">Forget Password?   </a><br></td>
+				<td><br><a href="forgotpassword">Forget Password?&nbsp;&nbsp;   </a><br></td>
 				<td>   </td>
-				<td><br><a href="register">   New Member? Sign up now</a></td>
+				<td><br><a href="register">   Not a Member Yet? Create an Account </a></td>
 			</tr>
 		</table>
 	</form:form>
 	<table align="center">
 		<tr>
-			<td style="font-style: italic; color: red;">${message}</td>
+			<td style="font-style: italic; color: red;"></td>
 		</tr>
 	</table>
 </center>

@@ -19,10 +19,9 @@
 <script>
 function regform() { 
 	//FIRSTNAME
+	
 	var x = document.forms["regForm"]["firstname"].value;
-	  if (x == "") {
-	    alert("FirstName Cannot Be Empty");
-	    return false;}
+	  
 	  if ((x.length <=2)|| (x.length >20)){
 		  alert("Firstname lenght must be between 2 and 20");
 	  	return false;
@@ -49,8 +48,8 @@ function regform() {
 	    alert("Password Cannot Be Empty");
 	    return false;
 	    }
-	  if((p.length <= 5) || (p.length > 20)){
-		  alert("Password should be between 5 and 20");
+	  if((p.length <= 8) || (p.length > 20)){
+		  alert("Password should be between 8 and 20");
 		  return false;
 	  }
 	  //CONFIRMPASSWORD
@@ -68,8 +67,8 @@ function regform() {
 	  if(e.indexOf('@') <= 0 ){
 		  alert("Invalid email id");
 	  }
-	  if ((e.charAt(e.length-4)!='.') && (e.charAt(e.length-3)!='.')){
-		  alert("Invalid Email id length");
+	   if ((e.charAt(e.length-4)!='.') && (e.charAt(e.length-3)!='.')){
+	  	  alert("Invalid Email id length");
 	  }
 	  //MOBILE
 	  var m = document.forms["regForm"]["mobilenumber"].value;
@@ -107,7 +106,7 @@ function regform() {
 		<form:form id="regForm" modelAttribute="user" action="registerProcess" onsubmit="return regform()"
 		method="post">
 
-		<table align="center">
+		<br><br><table align="center">
 			<tr>
 				<td><form:label path="firstname">Firstname</form:label></td>
 				<td><form:input path="firstname" name="firstname" id="firstname" /></td>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Password change success!!!</h1>
-<a href="login">Go to login</a>
+<h1>Password changed successfully</h1>
+<a href="login">Click here to login</a>
 </body>
 </html>

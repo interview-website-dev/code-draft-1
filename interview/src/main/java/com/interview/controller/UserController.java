@@ -117,13 +117,19 @@ public class UserController {
  @RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
  public ModelAndView updateProcess(HttpServletRequest request, HttpServletResponse response,
      @ModelAttribute("user") User user,@RequestParam("companyMailId") String companyMailId) {
-   ModelAndView mavp = null; 
-System.out.println("hi"+user.getCompanyemailid());
+   ModelAndView mav = null; 
+System.out.println("new"+user.getCompanyemailid());
+System.out.println("old"+companyMailId);
      userService.updateuser(user,companyMailId);
-     companyMailId=user.getCompanyemailid();
-     mavp = new ModelAndView("profile");
+     mav = new ModelAndView("dashboard");
+     mav.addObject("firstname",user.getFirstname());
+     mav.addObject("lastname", user.getLastname());
+     mav.addObject("companyemailid", user.getCompanyemailid());
+     mav.addObject("mobilenumber", user.getMobilenumber());
+     mav.addObject("companyname", user.getCompanyname());
+     mav.addObject("city", user.getCity());
 
-   return mavp;
+   return mav;
  }
  @RequestMapping(value = "/forgotpassword", method = RequestMethod.GET)
  public ModelAndView showForgotPassword(HttpServletRequest request, HttpServletResponse response) {

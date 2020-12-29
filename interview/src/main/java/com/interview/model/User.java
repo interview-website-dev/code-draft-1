@@ -7,6 +7,7 @@ public class User {
   private String password;
   private String confirmpassword;
   private String companyemailid;
+  private String oldCompanyemailid;
   private String mobilenumber;
   private String companyname;
   private String city;
@@ -85,5 +86,13 @@ public String getUserid() {
 
 public void setUserid(String userid) {
 	Userid = userid;
+}
+
+public String getOldCompanyemailid() {
+	return oldCompanyemailid;
+}
+
+public void setOldCompanyemailid(String oldCompanyemailid) {
+	this.oldCompanyemailid = companyemailid;
 }
 }
