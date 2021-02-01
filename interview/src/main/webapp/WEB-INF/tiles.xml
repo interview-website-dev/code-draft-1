@@ -1,51 +1,203 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE tiles-definitions PUBLIC  
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"  
-       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">  
-<tiles-definitions>  
-    <definition name="base.definition"  
-        template="/WEB-INF/layout/layout.jsp">  
-        <put-attribute name="title" value="" />  
-        <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />  
-        <!-- <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />  --> 
-        <put-attribute name="body" value="" />  
-        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />  
-    </definition>
-    <definition name="login.definition"  
-        template="/WEB-INF/layout/loginlayout.jsp">  
-        <put-attribute name="title" value="" />     
-        <put-attribute name="body" value="" />  
-    </definition>  
-    <definition name="login" extends="login.definition">  
-        <put-attribute name="title" value="Welcome login" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />  
-    </definition>  
-    <definition name="registerpage" extends="base.definition">  
-        <put-attribute name="title" value="Welcome regis" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />  
-    </definition>
-    <definition name="regsu" extends="base.definition">  
-        <put-attribute name="title" value="Welcome regis" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/regsu.jsp" />  
-    </definition>
-    <definition name="forgotpassword" extends="base.definition">  
-        <put-attribute name="title" value="Welcome forgotpassword" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/forgotpassword.jsp" />  
-    </definition>
-    <definition name="passchangesuccess" extends="base.definition">  
-        <put-attribute name="title" value="Welcome forgotpassword" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/Passchangesuccess.jsp" />  
-    </definition>
-    <definition name="dashboard" extends="base.definition">  
-        <put-attribute name="title" value="Welcome regis" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/dashboard.jsp" />  
-    </definition>
-    <definition name="profile" extends="base.definition">  
-        <put-attribute name="title" value="Welcome regis" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/profile.jsp" />  
-    </definition>
-  <definition name="Logoutsuccess" extends="base.definition">  
-        <put-attribute name="title" value="Welcome Logout" />  
-        <put-attribute name="body" value="/WEB-INF/jsp/Logoutsuccess.jsp" />  
-    </definition>
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base.definition"
+		template="/WEB-INF/layout/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/layout/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+	<definition name="candidatebase.definition"
+		template="/WEB-INF/layout/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header"
+			value="/WEB-INF/layout/candidateheader.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+	<definition name="login.definition"
+		template="/WEB-INF/layout/loginlayout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<definition name="login" extends="login.definition">
+		<put-attribute name="title" value="Welcome login" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/login.jsp" />
+	</definition>
+	<definition name="candidatelogin" extends="login.definition">
+		<put-attribute name="title"
+			value="Welcome Candidate Login" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidatelogin.jsp" />
+	</definition>
+	<definition name="default" extends="login.definition">
+		<put-attribute name="title" value="Welcome Default" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/default.jsp" />
+	</definition>
+	<definition name="registerpage" extends="login.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/register.jsp" />
+	</definition>
+	<definition name="candidateregisterpage"
+		extends="login.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidateregister.jsp" />
+	</definition>
+	<definition name="regsu" extends="login.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/regsu.jsp" />
+	</definition>
+	<definition name="candidateregsu" extends="login.definition">
+		<put-attribute name="title" value="Welcome regsu" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidateregsu.jsp" />
+	</definition>
+	<definition name="forgotpassword" extends="login.definition">
+		<put-attribute name="title"
+			value="Welcome forgotpassword" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/forgotpassword.jsp" />
+	</definition>
+	<definition name="candidateforgotpassword"
+		extends="login.definition">
+		<put-attribute name="title"
+			value="Welcome forgotpassword" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidateforgotpassword.jsp" />
+	</definition>
+	<definition name="passchangesuccess"
+		extends="login.definition">
+		<put-attribute name="title"
+			value="Welcome forgotpassword" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/Passchangesuccess.jsp" />
+	</definition>
+	<definition name="candidatepasschangesuccess"
+		extends="login.definition">
+		<put-attribute name="title"
+			value="Welcome forgotpassword" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidatePasschangesuccess.jsp" />
+	</definition>
+	<definition name="dashboard" extends="base.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/dashboard.jsp" />
+	</definition>
+	<definition name="postdetails" extends="base.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/postdetails.jsp" />
+	</definition>
+	<definition name="candidatedashboard"
+		extends="candidatebase.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidatedashboard.jsp" />
+	</definition>
+	<definition name="postpage" extends="base.definition">
+		<put-attribute name="title" value="Welcome post" />
+		<put-attribute name="body" value="/WEB-INF/jsp/post.jsp" />
+	</definition>
+	<definition name="Skills" extends="base.definition">
+		<put-attribute name="title" value="Welcome skills" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/skillspage.jsp" />
+	</definition>
+	<definition name="candidateSkills"
+		extends="candidatebase.definition">
+		<put-attribute name="title" value="Welcome skills" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidateskillspage.jsp" />
+	</definition>
+	<definition name="summary" extends="base.definition">
+		<put-attribute name="title" value="Welcome summary" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/summary.jsp" />
+	</definition>
+	<definition name="candidatesummary"
+		extends="candidatebase.definition">
+		<put-attribute name="title" value="Welcome summary" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidatesummary.jsp" />
+	</definition>
+	<definition name="candidatepostdetails"
+		extends="candidatebase.definition">
+		<put-attribute name="title" value="Welcome summary" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidatepostdetails.jsp" />
+	</definition>
+	<definition name="profile" extends="base.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/profile.jsp" />
+	</definition>
+	<definition name="candidateprofile"
+		extends="candidatebase.definition">
+		<put-attribute name="title" value="Welcome candidate" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidateprofile.jsp" />
+	</definition>
+	<definition name="editpost" extends="base.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/editpost.jsp" />
+	</definition>
+	<definition name="editskills" extends="base.definition">
+		<put-attribute name="title" value="Welcome regis" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/editskills.jsp" />
+	</definition>
+	<definition name="submitsummary" extends="base.definition">
+		<put-attribute name="title"
+			value="Welcome submitsummary" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/postsummarysu.jsp" />
+	</definition>
+	<definition name="Logoutsuccess" extends="login.definition">
+		<put-attribute name="title" value="Welcome Logout" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/Logoutsuccess.jsp" />
+	</definition>
+	<definition name="candidateLogoutsuccess"
+		extends="login.definition">
+		<put-attribute name="title" value="Welcome Logout" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidateLogoutsuccess.jsp" />
+	</definition>
+	<definition name="passchange" extends="login.definition">
+		<put-attribute name="title" value="Welcome passchange" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/passchange.jsp" />
+	</definition>
+	<definition name="candidatepasschange"
+		extends="login.definition">
+		<put-attribute name="title" value="Welcome passchange" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/candidatefiles/candidatepasschange.jsp" />
+	</definition>
+	<definition name="viewapplicationdetails"
+		extends="base.definition">
+		<put-attribute name="title" value="Welcome passchange" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/viewapplicationdetails.jsp" />
+	</definition>
+	<definition name="viewapplication" extends="base.definition">
+		<put-attribute name="title" value="Welcome passchange" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/viewapplication.jsp" />
+	</definition>
+
 </tiles-definitions>  

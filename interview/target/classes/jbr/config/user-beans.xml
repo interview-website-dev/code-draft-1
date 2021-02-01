@@ -12,6 +12,9 @@
 
   <bean id="userService" class="com.interview.service.UserServiceImpl" />
   <bean id="userDao" class="com.interview.dao.UserDaoImpl" />
+  
+  <bean id="candidateService" class="com.interview.service.CandidateServiceImpl" />
+  <bean id="candidateDao" class="com.interview.dao.CandidateDaoImpl" />
 
   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
     <property name="dataSource" ref="datasource" />

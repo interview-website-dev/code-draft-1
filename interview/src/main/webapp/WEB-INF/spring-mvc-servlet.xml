@@ -10,30 +10,57 @@
 
 	<import resource="classpath:jbr/config/user-beans.xml" />
 
-	<context:component-scan base-package="com.interview" />
+	<context:component-scan
+		base-package="com.interview" />
 	<context:annotation-config />
 
-	<!-- <bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean> -->
-	
 	<bean id="viewResolver"
-          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <property name="viewClass">
-            <value>
-                org.springframework.web.servlet.view.tiles3.TilesView
-            </value>
-        </property>
-    </bean>
-    <bean id="tilesConfigurer"
-          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-        <property name="definitions">
-            <list>
-                <value>/WEB-INF/tiles.xml</value>
-            </list>
-        </property>
-    </bean>
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass">
+			<value>
+				org.springframework.web.servlet.view.tiles3.TilesView
+			</value>
+		</property>
+	</bean>
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtppro.zoho.in" />
+		<property name="port" value="465" />
+		<property name="username" value="info@corpvela.com" />
+		<property name="password" value="Reset@098123" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+
+			</props>
+		</property>
+	</bean>
+	<bean id="emailSender" class="com.interview.util.EmailSender">
+		<property name="mailSender" ref="mailSender" />
+		<property name="simpleMailMessage" ref="simpleMailMessage" />
+	</bean>
+	<!-- Configuration for email with attachment -->
+
+
+	<bean id="simpleMailMessage"
+		class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="info@corpvela.com" />
+		<property name="text">
+			<value>
+
+			</value>
+		</property>
+	</bean>
 
 </beans>
