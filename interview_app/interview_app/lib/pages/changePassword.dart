@@ -24,7 +24,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   Future forgotPassProcess(context) async {
-    var url = SERVER_URL + "/interview_app_phpfiles/change_password.php";
+    var url = Uri.http(SERVER_URL, "interview_app_phpfiles/change_password.php");
     var response = await http.post(url, body: {
       "emailid": emailId,
       "password": password.text,

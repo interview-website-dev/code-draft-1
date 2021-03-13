@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'package:interview_app/logger_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'forgotPassword.dart';
@@ -19,13 +20,14 @@ class _LogInState extends State<LogIn> {
   TextEditingController password = TextEditingController();
 
   Future login(BuildContext context) async {
-    var url = SERVER_URL + "/interview_app_phpfiles/login.php";
+    var url = Uri.http(SERVER_URL, "interview_app_phpfiles/login.php");
     var response = await http.post(url, body: {
       "emailid": emailid.text,
       "password": password.text,
     });
     var data = json.decode(response.body);
     if (data == "Success") {
+      logIn(emailid.text);
       Fluttertoast.showToast(
           msg: "Login successful",
           toastLength: Toast.LENGTH_SHORT,
@@ -96,8 +98,11 @@ class _LogInState extends State<LogIn> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Sign In',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3.0,
+                    color: Colors.grey),
               ),
             ),
             SizedBox(height: 25),
@@ -152,7 +157,8 @@ class _LogInState extends State<LogIn> {
                 child: ButtonTheme(
                   minWidth: width,
                   child: FlatButton(
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0)),
                     padding: EdgeInsets.all(10),
                     child: Text(
                       'Sign In',

@@ -16,7 +16,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   TextEditingController emailid = TextEditingController();
 
   Future forgotPassProcess(context) async {
-    var url = SERVER_URL + "/interview_app_phpfiles/forgot_password.php";
+    var url = Uri.http(SERVER_URL, "interview_app_phpfiles/forgot_password.php");;
     var response = await http.post(url, body: {
       "emailid": emailid.text,
     });

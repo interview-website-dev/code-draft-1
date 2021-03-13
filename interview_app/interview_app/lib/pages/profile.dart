@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:interview_app/gobalConstants.dart';
 import 'dashBoard.dart';
 import 'package:interview_app/main.dart';
 import 'package:interview_app/reusable-UI-widgets/drawers.dart';
@@ -18,7 +19,7 @@ class _ProfileState extends State<Profile> {
   TextEditingController mobilenumber = TextEditingController();
   TextEditingController password = TextEditingController();
   Future register() async {
-    var url = "http://192.168.29.154/interview_app_phpfiles/register.php";
+    var url = Uri.http(SERVER_URL, "interview_app_phpfiles/register.php");;
     var response = await http.post(url, body: {
       "firstname": firstname.text,
       "lastname": lastname.text,

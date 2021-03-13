@@ -22,7 +22,7 @@ class _RegisterState extends State<Register> {
   TextEditingController confirmPassword = TextEditingController();
   TextEditingController city = TextEditingController();
   Future register() async {
-    var url = SERVER_URL+"/interview_app_phpfiles/register.php";
+    var url = Uri.http(SERVER_URL, "interview_app_phpfiles/register.php");;
     var response = await http.post(url, body: {
       "firstname": firstname.text,
       "lastname": lastname.text,

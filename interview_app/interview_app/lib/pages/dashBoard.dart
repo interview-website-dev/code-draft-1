@@ -78,7 +78,7 @@ class MainListView extends StatefulWidget {
 }
 
 class MainListViewState extends State {
-  final String apiURL = SERVER_URL + '/interview_app_phpfiles/post_list.php';
+  final Uri apiURL = Uri.http(SERVER_URL, "interview_app_phpfiles/post_list.php");
 
   Future<List<Post>> fetchPosts() async {
     var response = await http.get(apiURL);

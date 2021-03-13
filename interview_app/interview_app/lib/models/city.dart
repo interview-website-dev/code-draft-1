@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:interview_app/gobalConstants.dart';
 class City {
   String cityName;
   
@@ -17,7 +18,8 @@ class City {
     );
   }
 }
-final String apiURL = 'http://192.168.29.153/interview_app_phpfiles/city_list.php';
+final Uri apiURL = Uri.http(SERVER_URL, "interview_app_phpfiles/city_list.php");
+// 'http://192.168.29.153/interview_app_phpfiles/city_list.php';
 class CitiesViewModel {
   static List<City> cities;
 
