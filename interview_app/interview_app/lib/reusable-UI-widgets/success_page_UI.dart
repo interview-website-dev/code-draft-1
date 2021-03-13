@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'gobalConstants.dart';
+import 'package:interview_app/pages/logIn.dart';
+import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
-class ErrorPage extends StatefulWidget {
-  @override
-  _ErrorPageState createState() => _ErrorPageState();
-   
+
+class SuccessPageUI extends StatefulWidget {
+  _SuccessPageUIState createState() => _SuccessPageUIState();
+  final String mainText;
+  final String subText;
+  final Widget redirection;
+  SuccessPageUI(
+      {Key? key,
+      required this.mainText,
+      required this.subText,
+      required this.redirection})
+      : super(key: key);
 }
 
-class _ErrorPageState extends State<ErrorPage> {
+class _SuccessPageUIState extends State<SuccessPageUI> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
- 
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -20,22 +29,8 @@ class _ErrorPageState extends State<ErrorPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
-
-      /* appBar: AppBar(
-       
-        title: Image.asset('assets/images/logo_final.png', width:180,alignment: Alignment.centerLeft,),  
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.search),
-          ),
-          Icon(Icons.more_vert),
-        ],
-        backgroundColor: Colors.white
-      ),*/
       body: Container(
-        width: double.infinity,
-        margin: const EdgeInsets.all(0.0),
+        margin: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topRight,
@@ -52,21 +47,32 @@ class _ErrorPageState extends State<ErrorPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                '404',
-                style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
+                widget.mainText,
+                style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3.0,
+                    color: Colors.grey),
               ),
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Something went wrong',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
+                widget.subText,
+                textAlign: TextAlign.center,
+                textDirection: TextDirection.rtl,
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3.0,
+                    color: Colors.grey),
               ),
             ),
             SizedBox(height: 25),
-         
+            MaterialButton(
+              onPressed: () => {},
+              child: widget.redirection,
+            ),
           ],
         ),
       ),

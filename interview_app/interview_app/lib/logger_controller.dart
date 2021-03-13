@@ -15,11 +15,11 @@ Future<bool> isLoggedIn() async {
 
 Future<String> getLoggedInEmailId() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  return preferences.getString("loggedInEmailId") ?? "error-page-redirection";
+  return preferences.getString("loggedInEmailId") ?? "page-redirection";
 }
 
 logOut() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   preferences.setBool("isLoggedIn", false);
-  preferences.setString("loggedInEmailId", null);
+  preferences.setString("loggedInEmailId", "");
 }

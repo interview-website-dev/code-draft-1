@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:interview_app/pages/changePasswordSuccess.dart';
 import 'package:interview_app/errorPage.dart';
 import 'package:interview_app/pages/logIn.dart';
@@ -9,16 +8,15 @@ import 'package:http/http.dart' as http;
 import 'register.dart';
 class ChangePassword extends StatefulWidget {
   final String emailId;
-  ChangePassword({Key key, @required this.emailId}) : super(key: key);
+  ChangePassword({Key? key, required this.emailId}) : super(key: key);
   @override
   _ChangePasswordState createState() => _ChangePasswordState(emailId: emailId);
    
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  final String emailId;
-
   // In the constructor, require a Todo.
+  String? emailId;
   _ChangePasswordState({@required this.emailId});
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController password = TextEditingController();
@@ -39,7 +37,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   }
 
   void _showSnackbar(BuildContext context) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
       content: Text(
         'Username invalid',
         textAlign: TextAlign.center,

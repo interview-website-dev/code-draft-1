@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:interview_app/gobalConstants.dart';
 class City {
-  String cityName;
+  String? cityName;
   
 
   City({
@@ -21,7 +21,7 @@ class City {
 final Uri apiURL = Uri.http(SERVER_URL, "interview_app_phpfiles/city_list.php");
 // 'http://192.168.29.153/interview_app_phpfiles/city_list.php';
 class CitiesViewModel {
-  static List<City> cities;
+  static List<City>? cities;
 
   static Future loadCities() async {
    var response = await http.get(apiURL);

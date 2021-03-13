@@ -6,34 +6,43 @@ import 'package:interview_app/pages/profile.dart';
 import 'package:interview_app/pages/viewPostDetails.dart';
 import 'package:http/http.dart' as http;
 import 'package:interview_app/models/post.dart';
-import 'package:interview_app/reusable-UI-widgets/drawers.dart';
+import 'package:interview_app/reusable-UI-widgets/clickable_text.dart';
+import 'package:interview_app/reusable-UI-widgets/strut_widgets.dart';
+ScrollController _scrollController = ScrollController();
 class DashBoard extends StatelessWidget {
+  final String heading = "Positions Available";
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.black),
-            title: Image.asset('assets/images/logo_final.png', width: 180),
-            centerTitle: true,
-            bottom: PreferredSize(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Positions Available',
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 3.0,
-                        color: Colors.grey),
-                  ),
+      appBar: customAppBarWidget(context, defaultAppBarHeader(context,heading)),
+      body: new Builder(
+          builder: (BuildContext context) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Expanded(
+                  flex: 10,
+                  child: MainListView(context: context,)
                 ),
-                preferredSize: null),
-          )),
-      body: MainListView(),
-      drawer: drawerWidget(),
+                Expanded(
+                  
+                  child: GestureDetector(
+                    onTap: () {
+                      _scrollController.animateTo(
+                          _scrollController.position.maxScrollExtent,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.ease);
+                    },
+                    child: goToTopText(),)
+                  ),
+
+              ],
+            );
+        }
+      ),
+      drawer: CustomDrawerWidget(),
       /*Center(
         child: RaisedButton(
           onPressed: () { 
@@ -75,6 +84,8 @@ class DashBoard extends StatelessWidget {
 
 class MainListView extends StatefulWidget {
   MainListViewState createState() => MainListViewState();
+  final BuildContext context;
+  MainListView({required this.context});
 }
 
 class MainListViewState extends State {
@@ -102,7 +113,8 @@ class MainListViewState extends State {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
+    
     return FutureBuilder<List<Post>>(
       future: fetchPosts(),
       builder: (context, snapshot) {
@@ -110,7 +122,10 @@ class MainListViewState extends State {
           return Center(child: CircularProgressIndicator());
 
         return ListView(
-          children: snapshot.data
+           controller: _scrollController,
+                  reverse: true,
+                  shrinkWrap: true,
+          children: snapshot.data!
               .map((data) => Column(
                     children: <Widget>[
                       SizedBox(
@@ -138,7 +153,7 @@ class MainListViewState extends State {
                                               columnWidths: {1: FixedColumnWidth(80.0)},
                                                 children: [
                                                   TableRow(children: [  Text(
-                                              data.positionName,
+                                              data.positionName!,
                                               style: TextStyle(
                                                 decorationStyle:
                                                     TextDecorationStyle.dotted,
@@ -191,7 +206,7 @@ class MainListViewState extends State {
                                                       ),
                                                     ),
                                                     Text(
-                                                      data.companyName,
+                                                      data.companyName!,
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 18.0,
@@ -207,7 +222,7 @@ class MainListViewState extends State {
                                                       ),
                                                     ),
                                                     Text(
-                                                      data.date,
+                                                      data.date!,
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 18.0,
@@ -223,7 +238,7 @@ class MainListViewState extends State {
                                                       ),
                                                     ),
                                                     Text(
-                                                      data.registeredTime,
+                                                      data.registeredTime!,
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 18.0,
@@ -249,6 +264,7 @@ class MainListViewState extends State {
                     ],
                   ))
               .toList(),
+              
         );
       },
     );

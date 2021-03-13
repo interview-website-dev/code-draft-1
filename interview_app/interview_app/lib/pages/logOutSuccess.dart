@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:interview_app/pages/logIn.dart';
 import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
+import 'package:interview_app/reusable-UI-widgets/clickable_text.dart';
 import 'register.dart';
 class LogOutSuccess extends StatefulWidget {
   @override
@@ -12,30 +12,16 @@ class LogOutSuccess extends StatefulWidget {
 }
 
 class _LogOutSuccessState extends State<LogOutSuccess> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
  
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    Future<dynamic> signInNav(){return  Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LogIn(),
+                        ),
+                      );}
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      key: _scaffoldKey,
-
-      /* appBar: AppBar(
-       
-        title: Image.asset('assets/images/logo_final.png', width:180,alignment: Alignment.centerLeft,),  
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.search),
-          ),
-          Icon(Icons.more_vert),
-        ],
-        backgroundColor: Colors.white
-      ),*/
       body: Container(
         margin: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
@@ -62,7 +48,7 @@ class _LogOutSuccessState extends State<LogOutSuccess> {
              Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text( 
-                'LoggedOut successfully',
+                'Loggedout successfully',
                 textAlign: TextAlign.center,
                 textDirection: TextDirection.rtl,
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,letterSpacing: 3.0,
@@ -82,28 +68,7 @@ class _LogOutSuccessState extends State<LogOutSuccess> {
                         ),
                       );
                     },
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Click ",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "here ",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.pink[900]),
-                          ),
-                           Text(
-                            "to sign in",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                          ),
-                        ]),
+                    child: clickToSignInText(),
                 
               ),
             ),

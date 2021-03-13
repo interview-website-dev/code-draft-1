@@ -1,17 +1,17 @@
 class Post {
-  String employerId;
-  String positionId;
-  String positionName;
-  String date;
-  String location;
-  String address;
-  String qualification;
-  String salary;
-  String noOfPositions;
-  String fileName;
-  String registeredTime;
-  String latestUpdatedTime;
-  String companyName;
+  String? employerId;
+  String? positionId;
+  String? positionName;
+  String? date;
+  String? location;
+  String? address;
+  String? qualification;
+  String? salary;
+  String? noOfPositions;
+  String? fileName;
+  String? registeredTime;
+  String? latestUpdatedTime;
+  String? companyName;
 
   Post(
       {this.employerId,
@@ -28,7 +28,7 @@ class Post {
    this.latestUpdatedTime,
    this.companyName});
 
-  factory Post.fromJson(Map<String, dynamic> json) {
+  factory Post.fromJson(Map<String?, dynamic> json) {
     return Post(
     
    positionName: json['Positionname'],

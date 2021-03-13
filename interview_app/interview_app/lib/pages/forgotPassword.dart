@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'changePassword.dart';
 import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   void _showSnackbar(BuildContext context) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(
+    _scaffoldKey.currentState!.showSnackBar(SnackBar(
       content: Text(
         'Username invalid',
         textAlign: TextAlign.center,
