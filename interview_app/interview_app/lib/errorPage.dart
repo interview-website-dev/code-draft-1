@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'gobalConstants.dart';
 import 'package:http/http.dart' as http;
-import 'register.dart';
 class ErrorPage extends StatefulWidget {
   @override
   _ErrorPageState createState() => _ErrorPageState();

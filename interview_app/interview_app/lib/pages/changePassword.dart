@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:interview_app/changePasswordSuccess.dart';
+import 'package:interview_app/pages/changePasswordSuccess.dart';
 import 'package:interview_app/errorPage.dart';
-import 'package:interview_app/main.dart';
-import 'gobalConstants.dart';
+import 'package:interview_app/pages/logIn.dart';
+import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
 import 'register.dart';
 class ChangePassword extends StatefulWidget {
@@ -157,7 +157,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
+                          builder: (context) => LogIn(),
                         ),
                       );
                     },

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:interview_app/main.dart';
-import 'gobalConstants.dart';
+import 'package:interview_app/pages/logIn.dart';
+import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
 import 'register.dart';
-class RegisterationSuccess extends StatefulWidget {
+class ChangePasswordSuccess extends StatefulWidget {
   @override
-  _RegisterationSuccessState createState() => _RegisterationSuccessState();
+  _ChangePasswordSuccessState createState() => _ChangePasswordSuccessState();
    
 }
 
-class _RegisterationSuccessState extends State<RegisterationSuccess> {
+class _ChangePasswordSuccessState extends State<ChangePasswordSuccess> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
@@ -62,7 +62,7 @@ class _RegisterationSuccessState extends State<RegisterationSuccess> {
              Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text( 
-                'Registered successfully',
+                'Changed password successfully',
                 textAlign: TextAlign.center,
                 textDirection: TextDirection.rtl,
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,letterSpacing: 3.0,
@@ -78,7 +78,7 @@ class _RegisterationSuccessState extends State<RegisterationSuccess> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
+                          builder: (context) => LogIn(),
                         ),
                       );
                     },

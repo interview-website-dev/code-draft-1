@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'gobalConstants.dart';
-import 'profile.dart';
-import 'viewPostDetails.dart';
+import 'package:interview_app/gobalConstants.dart';
+import 'package:interview_app/pages/profile.dart';
+import 'package:interview_app/pages/viewPostDetails.dart';
 import 'package:http/http.dart' as http;
-import 'models/post.dart';
-
+import 'package:interview_app/models/post.dart';
+import 'package:interview_app/reusable-UI-widgets/drawers.dart';
 class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,70 +33,7 @@ class DashBoard extends StatelessWidget {
                 preferredSize: null),
           )),
       body: MainListView(),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Align(alignment: Alignment.center,child:Column(children: [Image.asset('assets/images/avatar-placeholder.png', width: 80),SizedBox(
-                        height: 20,
-                      ),Text(
-                'FirstName LastName',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
-              ),],)),
-              decoration: BoxDecoration(
-                color: Colors.indigo[900],
-              ),
-            ),
-             ListTile(
-              title: Text(
-                'Profile',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
-              ),
-              onTap: () {
-               Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Profile(),
-                        ),
-                      );
-              },
-            ),
-            ListTile(
-              title: Text(
-                'Dashboard',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text(
-                'Log Out',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
-              ),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: drawerWidget(),
       /*Center(
         child: RaisedButton(
           onPressed: () { 
@@ -198,7 +135,7 @@ class MainListViewState extends State {
                                         child: Stack(
                                           children: <Widget>[
                                             Table(
-                                              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                                              columnWidths: {1: FixedColumnWidth(80.0)},
                                                 children: [
                                                   TableRow(children: [  Text(
                                               data.positionName,
@@ -206,26 +143,31 @@ class MainListViewState extends State {
                                                 decorationStyle:
                                                     TextDecorationStyle.dotted,
                                                 color: Colors.black,
-                                                fontSize: 30.0,
+                                                fontSize: 20.0,
                                                 fontWeight: FontWeight.bold,
                                               ),
-                                            ), RaisedButton(
-                                                child: Text('Apply',style: TextStyle(
+                                            ), Container(
+            width: 40.0,
+            height: 35.0,
+            child :RaisedButton(
+                    child: Text(
+                                              "Apply",
+                                              style: TextStyle(
                                                 decorationStyle:
                                                     TextDecorationStyle.dotted,
-                                                color: Colors.green,
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),),
-                                                
-                                                shape: RoundedRectangleBorder(
-                                                 side: BorderSide(color: Colors.green, width: 2),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0))),
-                                                onPressed: () {},
+      
+                                                fontSize: 13.0,
+                                              
                                               ),
+                                            ),
+                    onPressed: () {},
+                    color: Colors.green,
+                    textColor: Colors.white,
+                    splashColor: Colors.grey,
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    
+                  )
+            )
                                             ])]),
                                           
                                             Align(
@@ -245,14 +187,14 @@ class MainListViewState extends State {
                                                       'Company Name',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                       ),
                                                     ),
                                                     Text(
                                                       data.companyName,
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                       ),
                                                     )
                                                   ]),
@@ -261,14 +203,14 @@ class MainListViewState extends State {
                                                       'Walk in Date',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                       ),
                                                     ),
                                                     Text(
                                                       data.date,
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                       ),
                                                     )
                                                   ]),
@@ -277,14 +219,14 @@ class MainListViewState extends State {
                                                       'Posted date',
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                       ),
                                                     ),
                                                     Text(
                                                       data.registeredTime,
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontSize: 20.0,
+                                                        fontSize: 18.0,
                                                       ),
                                                     )
                                                   ])

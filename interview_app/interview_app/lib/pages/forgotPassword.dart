@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'changePassword.dart';
-import 'gobalConstants.dart';
+import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
 import 'dashBoard.dart';
 import 'register.dart';

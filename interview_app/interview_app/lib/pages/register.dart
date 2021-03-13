@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dashBoard.dart';
-import 'gobalConstants.dart';
-import 'main.dart';
+import 'package:interview_app/gobalConstants.dart';
+import 'logIn.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
-import 'models/city.dart';
+import 'package:interview_app/models/city.dart';
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -227,7 +227,7 @@ class _RegisterState extends State<Register> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
+                          builder: (context) => LogIn(),
                         ),
                       );
                     },
