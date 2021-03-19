@@ -4,6 +4,7 @@ import 'package:interview_app/pages/logOutSuccess.dart';
 import 'package:interview_app/pages/profile.dart';
 import 'package:interview_app/pages/register.dart';
 import 'package:interview_app/reusable-UI-widgets/clickable_text.dart';
+import 'package:interview_app/reusable-UI-widgets/validation_functions.dart';
 
 /// Returns the custom app bar widget
 PreferredSize customAppBarWidget(BuildContext context, PreferredSize heading) {
@@ -131,8 +132,14 @@ class CustomDrawerWidget extends StatelessWidget {
 }
 
 /// Returns the default text widget
-Padding defaultTextField(BuildContext contextInput, String labelInput,
-    Icon iconInput, TextEditingController controllerInput, bool obscureInput,var validationInput) {
+Padding defaultTextField(
+    BuildContext contextInput,
+    String labelInput,
+    Icon iconInput,
+    TextEditingController controllerInput,
+    bool obscureInput,
+    String? Function(String?)? validationInput,
+    bool enablationInput,) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
     child: TextFormField(
@@ -146,6 +153,7 @@ Padding defaultTextField(BuildContext contextInput, String labelInput,
       ),
       controller: controllerInput,
       validator: validationInput,
+      enabled: enablationInput,
     ),
   );
 }
@@ -165,24 +173,25 @@ GestureDetector defaultSignUpWidget(BuildContext context) {
   );
 }
 
-Container defaultButtonWidget(BuildContext context, double widthInput, String labelInput, var onPressedInput){
+Container defaultButtonWidget(BuildContext context, double widthInput,
+    String labelInput, var onPressedInput) {
   return Container(
-                margin: EdgeInsets.fromLTRB(40, 8, 40, 0),
-                child: ButtonTheme(
-                  minWidth: widthInput,
-                  child: FlatButton(
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(8.0)),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      labelInput,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    color: Colors.blueAccent,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      onPressedInput;
-                    },
-                  ),
-                ));
+      margin: EdgeInsets.fromLTRB(40, 8, 40, 0),
+      child: ButtonTheme(
+        minWidth: widthInput,
+        child: FlatButton(
+          shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(8.0)),
+          padding: EdgeInsets.all(10),
+          child: Text(
+            labelInput,
+            style: TextStyle(fontSize: 20.0),
+          ),
+          color: Colors.blueAccent,
+          textColor: Colors.white,
+          onPressed: () {
+            onPressedInput;
+          },
+        ),
+      ));
 }

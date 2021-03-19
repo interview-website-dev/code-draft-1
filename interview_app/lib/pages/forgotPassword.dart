@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:interview_app/reusable-UI-widgets/strut_widgets.dart';
+import 'package:interview_app/reusable-UI-widgets/validation_functions.dart';
 import 'dart:convert';
 import 'changePassword.dart';
 import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
 import 'dashBoard.dart';
 import 'register.dart';
+
 class ForgotPassword extends StatefulWidget {
   @override
   _ForgotPasswordState createState() => _ForgotPasswordState();
@@ -12,22 +15,30 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>();
+  ValidationRequiredValues? validationRequiredValues;
   TextEditingController emailid = TextEditingController();
 
+  get value => null;
+
   Future forgotPassProcess(context) async {
-    var url = Uri.http(SERVER_URL, "interview_app_phpfiles/forgot_password.php");;
+    var url =
+        Uri.http(SERVER_URL, "interview_app_phpfiles/forgot_password.php");
+    ;
     var response = await http.post(url, body: {
       "emailid": emailid.text,
     });
     var data = json.decode(response.body);
     if (data == "Success") {
       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChangePassword(emailId: emailid.text,),
-                        ),
-                      );
-    }else{
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChangePassword(
+            emailId: emailid.text,
+          ),
+        ),
+      );
+    } else {
       _showSnackbar(context);
     }
   }
@@ -51,19 +62,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
-
-      /* appBar: AppBar(
-       
-        title: Image.asset('assets/images/logo_final.png', width:180,alignment: Alignment.centerLeft,),  
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Icon(Icons.search),
-          ),
-          Icon(Icons.more_vert),
-        ],
-        backgroundColor: Colors.white
-      ),*/
       body: Container(
         margin: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
@@ -83,44 +81,64 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Forgot Password',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,letterSpacing: 3.0,
-      color:Colors.grey),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3.0,
+                    color: Colors.grey),
               ),
             ),
             SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.lightBlue[50],
-                  labelText: 'EmailID',
-                  prefixIcon: Icon(Icons.person),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-                controller: emailid,
-              ),
+            Form(
+              key: _formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    // Padding(
+                    //   padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
+                    //   child: TextFormField(
+                    //     decoration: InputDecoration(
+                    //       filled: true,
+                    //       fillColor: Colors.lightBlue[50],
+                    //       labelText: 'EmailID',
+                    //       prefixIcon: Icon(Icons.person),
+                    //       border: OutlineInputBorder(
+                    //           borderRadius: BorderRadius.circular(8)),
+                    //     ),
+                    //     controller: emailid,
+                    //     validator: (value) {
+                    //       if (value!.isEmpty) {
+                    //         return 'EmailID cannot be empty';
+                    //       }
+                    //     },
+                    //   ),
+                    // ),
+                    defaultTextField(context, 'EmailID', Icon(Icons.person), emailid, false, emailValidator, true),
+                    Container(
+                        margin: EdgeInsets.fromLTRB(40, 8, 40, 0),
+                        child: ButtonTheme(
+                          minWidth: width,
+                          child: FlatButton(
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(8.0)),
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              'Change Password',
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                            color: Colors.blueAccent,
+                            textColor: Colors.white,
+                            onPressed: () {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              forgotPassProcess(context);
+                            },
+                          ),
+                        )),
+                  ]),
             ),
-          
-            Container(
-                margin: EdgeInsets.fromLTRB(40, 8, 40, 0),
-                child: ButtonTheme(
-                  minWidth: width,
-                  child: FlatButton(
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Change Password',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    color: Colors.blueAccent,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      forgotPassProcess(context);
-                    },
-                  ),
-                )),Expanded(
+            Expanded(
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: MaterialButton(
