@@ -8,18 +8,20 @@ logIn(String emailId) async {
   preferences.setString("loggedInEmailId", emailId);
 }
 
-Future<bool> isLoggedIn() async {
+Future isLoggedIn() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  return preferences.getBool("isLoggedIn") ?? false;
+  return preferences.getBool("isLoggedIn");
 }
 
-Future<String> getLoggedInEmailId() async {
-  SharedPreferences preferences = await SharedPreferences.getInstance();
-  return preferences.getString("loggedInEmailId") ?? "page-redirection";
+Future getLoggedInEmailId(String emailId) async {
+  final SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.getString("loggedInEmailId");
 }
 
 logOut() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   preferences.setBool("isLoggedIn", false);
   preferences.setString("loggedInEmailId", "");
+  print(preferences.getBool("isLoggedIn"));
+  print(preferences.getString("loggedInEmailId"));
 }

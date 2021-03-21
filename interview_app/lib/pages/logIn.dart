@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:interview_app/logger_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'forgotPassword.dart';
 import 'package:interview_app/gobalConstants.dart';
 import 'register.dart';
@@ -25,7 +27,10 @@ class _LogInState extends State<LogIn> {
     });
     var data = json.decode(response.body);
     if (data == "Success") {
-    
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setBool("isLoggedIn", true);
+  print(preferences.getBool("isLoggedIn"));
+  preferences.setString("loggedInEmailId", emailid.text);
       Navigator.push(
         context,
         MaterialPageRoute(

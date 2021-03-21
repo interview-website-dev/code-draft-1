@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:interview_app/logger_controller.dart';
 import 'package:interview_app/pages/dashBoard.dart';
 import 'package:interview_app/pages/logOutSuccess.dart';
 import 'package:interview_app/pages/profile.dart';
 import 'package:interview_app/pages/register.dart';
-import 'package:interview_app/reusable-UI-widgets/clickable_text.dart';
-import 'package:interview_app/reusable-UI-widgets/validation_functions.dart';
+import 'package:interview_app/reusable_code_blocks/clickable_text.dart';
+import 'package:interview_app/reusable_code_blocks/validation_functions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Returns the custom app bar widget
 PreferredSize customAppBarWidget(BuildContext context, PreferredSize heading) {
@@ -116,7 +118,11 @@ class CustomDrawerWidget extends StatelessWidget {
                   letterSpacing: 3.0,
                   color: Colors.grey),
             ),
-            onTap: () {
+            onTap: () async {
+              SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.setBool("isLoggedIn", false);
+  print(preferences.getBool("isLoggedIn"));
+  preferences.setString("loggedInEmailId", "");
               Navigator.push(
                 context,
                 MaterialPageRoute(

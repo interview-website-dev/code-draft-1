@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:interview_app/gobalConstants.dart';
-import 'package:interview_app/reusable-UI-widgets/clickable_text.dart';
+import 'package:interview_app/reusable_code_blocks/clickable_text.dart';
 import 'dashBoard.dart';
 import 'package:interview_app/main.dart';
-import 'package:interview_app/reusable-UI-widgets/strut_widgets.dart';
+import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
 
 class Profile extends StatefulWidget {
   @override

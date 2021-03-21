@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:interview_app/reusable-UI-widgets/strut_widgets.dart';
-import 'package:interview_app/reusable-UI-widgets/validation_functions.dart';
+import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
+import 'package:interview_app/reusable_code_blocks/validation_functions.dart';
 import 'dart:convert';
 import 'changePassword.dart';
 import 'package:interview_app/gobalConstants.dart';

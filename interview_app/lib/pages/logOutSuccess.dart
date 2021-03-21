@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:interview_app/pages/logIn.dart';
 import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
-import 'package:interview_app/reusable-UI-widgets/clickable_text.dart';
+import 'package:interview_app/reusable_code_blocks/clickable_text.dart';
 import 'register.dart';
 class LogOutSuccess extends StatefulWidget {
   @override

@@ -5,8 +5,8 @@ import 'package:interview_app/errorPage.dart';
 import 'package:interview_app/pages/logIn.dart';
 import 'package:interview_app/gobalConstants.dart';
 import 'package:http/http.dart' as http;
-import 'package:interview_app/reusable-UI-widgets/strut_widgets.dart';
-import 'package:interview_app/reusable-UI-widgets/validation_functions.dart';
+import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
+import 'package:interview_app/reusable_code_blocks/validation_functions.dart';
 import 'package:interview_app/utils/mailSender.dart';
 import 'register.dart';
 
