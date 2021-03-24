@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:interview_app/gobalConstants.dart';
+import 'package:interview_app/reusable_code_blocks/gobalConstants.dart';
 class City {
   String? cityName;
   

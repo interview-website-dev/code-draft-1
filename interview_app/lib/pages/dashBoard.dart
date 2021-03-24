@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:interview_app/gobalConstants.dart';
-import 'package:interview_app/logger_controller.dart';
+import 'package:interview_app/reusable_code_blocks/gobalConstants.dart';
+import 'package:interview_app/reusable_code_blocks/logger_controller.dart';
+import 'package:interview_app/models/Candidate.dart';
 import 'package:interview_app/pages/profile.dart';
 import 'package:interview_app/pages/viewPostDetails.dart';
 import 'package:http/http.dart' as http;
-import 'package:interview_app/models/post.dart';
+import 'package:interview_app/models/Post.dart';
 import 'package:interview_app/reusable_code_blocks/clickable_text.dart';
 import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +22,8 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
 String? emailId;
+String firstName = "firstName";
+List<Candidate?>? finalCandidate;
 @override
   void initState() {
     getValidationData();
@@ -35,14 +38,19 @@ String? emailId;
       emailId = obtainedEmail;
     });
     print(emailId);
-  }
-Future getCandidateInfo() async {
-   var url = Uri.http(SERVER_URL, "interview_app_phpfiles/get_candidate_info.php");
+     var url = Uri.http(SERVER_URL, "interview_app_phpfiles/get_candidate_info.php");
     var response = await http.post(url, body: {
       "emailid": emailId,
     });
     var data = json.decode(response.body);
-}
+    List<Candidate> candidate = data.map<Candidate>((json) {
+        return Candidate.fromJson(json);
+      }).toList();
+    sharedPreferences.setString("loggedInFirstName",candidate[0].firstName!);
+      setState(() {
+      finalCandidate = candidate;
+      firstName = candidate[0].firstName!;
+  });}
   final String heading = "Positions Available";
   @override
   Widget build(BuildContext context) {
@@ -50,88 +58,14 @@ Future getCandidateInfo() async {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      
-      floatingActionButton:   FloatingActionButton(
-  backgroundColor: Colors.indigo[900],
-  foregroundColor: Colors.white,
-  onPressed: () {
-   
-    _scrollController.addListener(() {});
-     _scrollController.animateTo(
-                _scrollController.position.maxScrollExtent,
-                  duration: Duration(milliseconds: 500),
-                 curve: Curves.ease);
-  },
-  child: Icon(Icons.arrow_upward_rounded),
-),
-      appBar:
-          customAppBarWidget(context, defaultAppBarHeader(context, heading)),
-      body: new Builder(builder: (BuildContext context) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Expanded(
-                flex: 10,
-                child: MainListView(
-                  context: context,
-                )),
-            // Expanded(
-            //     child: GestureDetector(
-            //   onTap: () {
-            //     _scrollController.animateTo(
-            //         _scrollController.position.maxScrollExtent,
-            //         duration: Duration(milliseconds: 500),
-            //         curve: Curves.ease);
-            //   },
-            //   child: goToTopText(),
-            // )),
-          ],
-        );
-      }),
-      drawer: CustomDrawerWidget(),
-      /*Center(
-        child: RaisedButton(
-          onPressed: () { 
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Profile(),
-              ),
-            );
-          },
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-          padding: EdgeInsets.all(0.0),
-          child: Ink(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.purple[100], Color(0xFFFFFF)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-            ),
-            child: Container(
-              constraints: BoxConstraints(maxWidth: 50.0, maxHeight: 50.0),
-              alignment: Alignment.center,
-              child: Text(
-                "Edit profile",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.purple),
-              ),
-            ),
-          ),
-        ),
-      ),*/
-    );
+    body: MainListView(),
+    drawer: customDrawerWidget(context, firstName),
+  );
   }
 }
 
 class MainListView extends StatefulWidget {
   MainListViewState createState() => MainListViewState();
-  final BuildContext context;
-  MainListView({required this.context});
 }
 
 class MainListViewState extends State {
@@ -161,13 +95,36 @@ class MainListViewState extends State {
 
   @override
   Widget build(context) {
+     double height = MediaQuery.of(context).size.height;
     return FutureBuilder<List<Post>>(
       future: fetchPosts(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return Center(child: CircularProgressIndicator());
 
-        return ListView(
+        return CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+
+  backgroundColor: Colors.white,
+              iconTheme: IconThemeData(color: Colors.black),
+              pinned: true,
+              snap: true,
+              floating: true,
+              expandedHeight: 160.0,
+              flexibleSpace: FlexibleSpaceBar(
+                title:  SABT(
+                child: Text("hiii")),
+                background: freeFloatingLogo(),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Center(
+                child: Container(
+                  height: height,
+                  alignment: Alignment.topCenter,
+                  padding: const EdgeInsets.only(top:10),
+                  child: ListView(
               controller: _scrollController,
               reverse: true,
               shrinkWrap: true,
@@ -178,6 +135,7 @@ class MainListViewState extends State {
                             height: 10,
                           ),
                           GestureDetector(
+                            onTap: (){},
                             child: Container(
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,9 +269,65 @@ class MainListViewState extends State {
                         ],
                       ))
                   .toList(),
-            );
+            ),
+                ),
+              ),
+            ),
+          ],
+        );
           
       },
+    );
+  }
+}
+class SABT extends StatefulWidget {
+  final Widget child;
+  const SABT({
+   Key? key,
+    required this.child,
+  }) : super(key: key);
+  @override
+  _SABTState createState() {
+    return new _SABTState();
+  }
+}
+class _SABTState extends State<SABT> {
+  ScrollPosition? _position;
+  bool? _visible;
+  @override
+  void dispose() {
+    _removeListener();
+    super.dispose();
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _removeListener();
+    _addListener();
+  }
+  void _addListener() {
+    _position = Scrollable.of(context)!.position;
+    _position?.addListener(_positionListener);
+    _positionListener();
+  }
+  void _removeListener() {
+    _position?.removeListener(_positionListener);
+  }
+  void _positionListener() {
+    final FlexibleSpaceBarSettings settings =
+      context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
+    bool visible = settings == null || settings.currentExtent <= settings.minExtent;
+    if (_visible != visible) {
+      setState(() {
+        _visible = visible;
+      });
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: _visible!,
+      child: widget.child,
     );
   }
 }

@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dashBoard.dart';
-import 'package:interview_app/gobalConstants.dart';
+import 'package:interview_app/reusable_code_blocks/gobalConstants.dart';
 import 'logIn.dart';
-import 'package:interview_app/models/city.dart';
+import 'package:interview_app/models/City.dart';
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();

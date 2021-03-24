@@ -1,11 +1,11 @@
 class Candidate {
   String? candidateId;
-  String? firstname;
+  String? firstName;
   String? lastName;
   String? age;
   String? gender;
   String? emailId;
-  String? mobilenumber;
+  String? mobileNumber;
   String? password;
   String? city;
   String? schName;
@@ -24,48 +24,61 @@ class Candidate {
   String? pgMarks;
   String? registeredTime;
   String? latestUpdatedTime;
-  String? companyName;
 
-  Candidate(
-      {this.candidateId,
-  this.firstname,
-  this.lastName,
-  this.age,
-  this.gender,
-  this.emailId,
-  this.mobilenumber,
-  this.password,
-  this.city,
-  this.schName,
-  this.schCity,
-  this.schPassedYear,
-  this.schMarks,
-  this.ugName,
-  this.ugCity,
-  this.ugSpecialization,
-  this.ugPassedYear,
-  this.ugMarks,
-  this.pgName,
-  this.pgCity,
-  this.pgSpecialization,
-  this.pgPassedYear,
-  this.pgMarks,
-  this.latestUpdatedTime,});
+  Candidate({
+    this.candidateId,
+    this.firstName,
+    this.lastName,
+    this.age,
+    this.gender,
+    this.emailId,
+    this.mobileNumber,
+    this.password,
+    this.city,
+    this.schName,
+    this.schCity,
+    this.schPassedYear,
+    this.schMarks,
+    this.ugName,
+    this.ugCity,
+    this.ugSpecialization,
+    this.ugPassedYear,
+    this.ugMarks,
+    this.pgName,
+    this.pgCity,
+    this.pgSpecialization,
+    this.pgPassedYear,
+    this.pgMarks,
+    this.registeredTime,
+    this.latestUpdatedTime,
+  });
 
   factory Candidate.fromJson(Map<String?, dynamic> json) {
     return Candidate(
-        positionName: json['Positionname'],
-        date: json['Date'],
-        location: json['Location'],
-        address: json['Address'],
-        qualification: json['Qualification'],
-        salary: json['Salary'].toString(),
-        noOfPositions: json['Noofpositions'].toString(),
-        fileName: json['filename'],
-        registeredTime: json['registeredtime'].toString().substring(0, 10),
-        latestUpdatedTime: json['latestupdatedtime'].toString(),
-        companyName: json['companyname'],
-        employerId: json['Employerid'].toString(),
-        positionId: json['Positionid'].toString());
+        candidateId: json['candidateid'].toString(),
+        firstName: json['firstname'].toString(),
+        lastName: json['lastname'].toString(),
+        age: json['age'].toString().toString(),
+        gender: json['gender'].toString(),
+        emailId: json['emailid'].toString(),
+        mobileNumber: json['mobilenumber'].toString().toString(),
+        password: json['password'].toString().toString(),
+        city: json['city'].toString(),
+        schName: json['schname'].toString(),
+        schCity: json['schcity'].toString(),
+        schPassedYear: json['schpassedyear'].toString(),
+        schMarks: json['schmarks'].toString(),
+        ugName: json['ugname'].toString(),
+        ugCity: json['ugcity'].toString(),
+        ugSpecialization: json['ugspecialization'].toString(),
+        ugPassedYear: json['ugpassedyear'].toString(),
+        ugMarks: json['ugmarks'].toString(),
+        pgName: json['pgname'].toString(),
+        pgCity: json['pgcity'].toString(),
+        pgSpecialization: json['pgspecialization'].toString(),
+        pgPassedYear: json['pgpassedyear'].toString(),
+        pgMarks: json['pgmarks'].toString(),
+        registeredTime: json['registeredtime'].toString().substring(0 , 10),
+        latestUpdatedTime: json['latestupdatedtime'].toString(),);
   }
 }

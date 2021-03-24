@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:interview_app/pages/register.dart';
 
 Row goToTopText() {
   return Row(

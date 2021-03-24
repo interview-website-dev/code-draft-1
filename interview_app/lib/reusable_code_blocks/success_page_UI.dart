@@ -1,7 +1,10 @@
+//
+// Stand by dart file
+//
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:interview_app/pages/logIn.dart';
-import 'package:interview_app/gobalConstants.dart';
+import 'package:interview_app/reusable_code_blocks/gobalConstants.dart';
 import 'package:http/http.dart' as http;
 
 class SuccessPageUI extends StatefulWidget {

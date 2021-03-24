@@ -1,10 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:interview_app/logger_controller.dart';
-import 'package:interview_app/pages/dashBoard.dart';
+import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:interview_app/pages/dashBoard.dart';
+import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
 import 'package:interview_app/pages/logIn.dart';
 
 void main() {
@@ -12,11 +10,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  /// The root widget of the application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Check',
+      title: 'interview_app',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -24,62 +22,62 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-bool? checker;
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool? checker;
   @override
   void initState() {
-    getValidationData().whenComplete(() async {
-      Timer(Duration(seconds: 2),
-          () => checker == false ?  Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LogIn(),
-        ),
-      ) :  Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DashBoard(),
-        ),
-      ));
-    });
+    getValidationData().whenComplete(
+      () async {
+        Timer(
+          Duration(seconds: 2),
+          () => checker == false
+              ? Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LogIn(),
+                  ),
+                )
+              : Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DashBoard(),
+                  ),
+                ),
+        );
+      },
+    );
     super.initState();
   }
 
   Future getValidationData() async {
-    SharedPreferences preferences =
-        await SharedPreferences.getInstance();
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     var obtainedBool = preferences.getBool("isLoggedIn") ?? false;
-    setState(() {
-      checker = obtainedBool;
-    });
+    setState(
+      () {
+        checker = obtainedBool;
+      },
+    );
     print(checker);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            child: Icon(Icons.local_activity),
-            radius: 50.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.white,
-            ),
-          )
-        ],
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            freeFloatingLogo(),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

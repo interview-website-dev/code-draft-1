@@ -8,9 +8,9 @@ logIn(String emailId) async {
   preferences.setString("loggedInEmailId", emailId);
 }
 
-Future isLoggedIn() async {
+isLoggedIn() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  return preferences.getBool("isLoggedIn");
+  return preferences.getBool("isLoggedIn") ?? false;
 }
 
 Future getLoggedInEmailId(String emailId) async {
