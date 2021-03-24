@@ -14,13 +14,13 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
-  TextEditingController emailid = TextEditingController();
+  TextEditingController emailId = TextEditingController();
 
   Future forgotPassProcess(context) async {
     var url =
         Uri.http(SERVER_URL, "interview_app_phpfiles/forgot_password.php");
     var response = await http.post(url, body: {
-      "emailid": emailid.text,
+      "emailId": emailId.text,
     });
     var data = json.decode(response.body);
     if (data == "Success") {
@@ -28,7 +28,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         context,
         MaterialPageRoute(
           builder: (context) => ChangePassword(
-            emailId: emailid.text,
+            emailId: emailId.text,
           ),
         ),
       );
@@ -52,7 +52,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            defaultTextField(context, 'Email ID', Icon(Icons.person), emailid,
+            defaultTextField(context, 'Email ID', Icon(Icons.person), emailId,
                 false, emailSignInValidator(), true),
             defaultButton(
                 'Change Password', width, forgotPasswordValidationFunction),

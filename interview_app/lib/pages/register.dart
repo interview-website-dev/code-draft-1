@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
 import 'dashBoard.dart';
 import 'package:interview_app/reusable_code_blocks/gobalConstants.dart';
 import 'logIn.dart';
@@ -12,24 +13,24 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController firstname = TextEditingController();
-  TextEditingController lastname = TextEditingController();
-  TextEditingController emailid = TextEditingController();
-  TextEditingController mobilenumber = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController confirmPassword = TextEditingController();
-  TextEditingController city = TextEditingController();
+  TextEditingController firstNameTC = TextEditingController();
+  TextEditingController lastNameTC = TextEditingController();
+  TextEditingController emailIdTC = TextEditingController();
+  TextEditingController mobileNumberTC = TextEditingController();
+  TextEditingController passwordTC = TextEditingController();
+  TextEditingController confirmPasswordTC = TextEditingController();
+  TextEditingController cityTC = TextEditingController();
   Future register() async {
     var url = Uri.http(SERVER_URL, "interview_app_phpfiles/register.php");;
     var response = await http.post(url, body: {
-      "firstname": firstname.text,
-      "lastname": lastname.text,
-      "emailid": emailid.text,
-      "mobilenumber": mobilenumber.text,
-      "password": password.text,
-      "city": city.text,
-      "registeredtime" : DateTime.now(),
-      "updatedtime" : DateTime.now(),
+      "firstName": firstNameTC.text,
+      "lastName": lastNameTC.text,
+      "emailId": emailIdTC.text,
+      "mobileNumber": mobileNumberTC.text,
+      "password": passwordTC.text,
+      "city": cityTC.text,
+      "registeredTime" : DateTime.now().toString(),
+      "lastestUpdatedTime" : DateTime.now().toString(),
     });
     /*var data = json.decode(response.body);*/
     var data= await json.decode(json.encode(response.body));
@@ -67,156 +68,22 @@ class _RegisterState extends State<Register> {
       color:Colors.grey),
               ),
             ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-                  child: TextField(
-                    decoration: InputDecoration(
-                    filled: true,
-                      fillColor: Colors.indigo[50],
-                      labelText: 'Firstname',
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                    controller: firstname,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.indigo[50],
-                      labelText: 'Lastname',
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                    controller: lastname,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.indigo[50],
-                      labelText: 'EmailID',
-                      prefixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                    controller: emailid,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.indigo[50],
-                      labelText: 'Mobilenumber',
-                      prefixIcon: Icon(Icons.phone),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                    controller: mobilenumber,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.indigo[50],
-                      labelText: 'City',
-                      prefixIcon: Icon(Icons.location_city_sharp),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                    controller: city,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.indigo[50],
-                      labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                    controller: password,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40, 8, 40, 8),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.indigo[50],
-                      labelText: 'Confirm Password',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                    controller: confirmPassword,
-                  ),
-                ),
+               
+                defaultTextField(context, 'First Name', Icon(Icons.person), firstNameTC, false, null, true),
+            
+                  defaultTextField(context, 'Last Name', Icon(Icons.person), lastNameTC, false, null, true),
               
-                 Container(
-                  margin: EdgeInsets.fromLTRB(40, 8, 40, 0),
-                child: ButtonTheme(
-                  minWidth: width,
-                  child: FlatButton(
-                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Register',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    color: Colors.blueAccent,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      register();
-                    },
-                  ),
-                )),
-             MaterialButton(
-                  onPressed: () => {},
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LogIn(),
-                        ),
-                      );
-                    },
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Already a member?",
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "Sign In",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.pink[900]),
-                          )
-                        ]),
-                  ),
-                ),
+                  defaultTextField(context, 'Email ID', Icon(Icons.email), emailIdTC, false, null, true),
+            
+                  defaultTextField(context, 'Mobile Number', Icon(Icons.phone), mobileNumberTC, false, null, true),
+              
+                  defaultTextField(context, 'City', Icon(Icons.location_city_sharp), cityTC, false, null, true),
+                
+                  defaultTextField(context, 'Password', Icon(Icons.lock), passwordTC, true, null, true),
+             
+             defaultTextField(context, 'Confirm Password', Icon(Icons.lock), confirmPasswordTC, true, null, true),
+               defaultButton('Sign Up', width, (){}),
+               defaultSignInWidget(context),
               ],
         
               ),
@@ -225,78 +92,3 @@ class _RegisterState extends State<Register> {
     ));
   }
 }
-
-// class AutoComplete extends StatefulWidget {
-//   @override
-//   _AutoCompleteState createState() => new _AutoCompleteState();
-// }
-
-// class _AutoCompleteState extends State<AutoComplete> {
-//   GlobalKey<AutoCompleteTextFieldState<City>> key = new GlobalKey();
-
-//   AutoCompleteTextField searchTextField;
-
-//   TextEditingController controller = new TextEditingController();
-
- 
-//   void _loadData() async {
-//     await CitiesViewModel.loadCities();
-//   }
-
-//   @override
-//   void initState() {
-//     _loadData();
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         resizeToAvoidBottomPadding: false,
-//         appBar: AppBar(
-//           title: Text('Auto Complete List Demo'),
-//         ),
-//         body: new Center(
-//             child: new Column(children: <Widget>[
-//           new Column(children: <Widget>[
-//             searchTextField = AutoCompleteTextField<City>(
-//                 style: new TextStyle(color: Colors.black, fontSize: 16.0),
-//                 decoration: new InputDecoration(
-//                     suffixIcon: Container(
-//                       width: 85.0,
-//                       height: 60.0,
-//                     ),
-//                     contentPadding: EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 20.0),
-//                     filled: true,
-//                     hintText: 'City',
-//                     hintStyle: TextStyle(color: Colors.black)),
-//                 itemSubmitted: (item) {
-//                   setState(() => searchTextField.textField.controller.text =
-//                       item.cityName);
-//                 },
-//                 clearOnSubmit: false,
-//                 key: key,
-//                 suggestions: CitiesViewModel.cities,
-//                 itemBuilder: (context, item) {
-//                   return Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: <Widget>[
-//                       Text(item.cityName,
-//                       style: TextStyle(
-//                         fontSize: 16.0
-//                       ),),
-//                     ],
-//                   );
-//                 },
-//                 itemSorter: (a, b) {
-//                   return a.cityName.compareTo(b.cityName);
-//                 },
-//                 itemFilter: (item, query) {
-//                   return item.cityName
-//                       .toLowerCase()
-//                       .startsWith(query.toLowerCase());
-//                 }),
-//           ]),
-//         ])));
-//   }
-// }

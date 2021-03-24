@@ -17,6 +17,16 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+   List<Skill> computationskills = [];
+   List<Skill> languageskills = [];
+   List<Skill> onJobskills = [];
+  String _skillName1 = 'Flutter';
+   String _proficiencyLevel1 = 'Beginner';
+   String _skillName2 = 'Flutter';
+   String _proficiencyLevel2 = 'Beginner';
+   String _skillName3 = 'Flutter';
+   String _proficiencyLevel3 = 'Beginner';
+   int _selectedIndex = 0;
   bool profileVisibility = true;
   bool enabledStatus = false;
   TextEditingController firstNameTC = TextEditingController();
@@ -38,7 +48,6 @@ class _ProfileState extends State<Profile> {
   TextEditingController pgSpecializationTC = TextEditingController();
   TextEditingController pgPassedYearTC = TextEditingController();
   TextEditingController pgMarksTC = TextEditingController();
-  List<Skill> skills = [];
   List<Candidate> finalCandidate = [];
   String firstName = "firstName";
   String? emailId;
@@ -75,11 +84,42 @@ class _ProfileState extends State<Profile> {
       cityTC.text = candidate[0].city!;
       schNameTC.text = candidate[0].schName!;
       schCityTC.text = candidate[0].schCity!;
+      schPassedYearTC.text = candidate[0].schPassedYear!;
+      schMarksTC.text = candidate[0].schMarks!;
+      ugNameTC.text = candidate[0].ugName!;
+      ugCityTC.text = candidate[0].ugCity!;
+      ugPassedYearTC.text = candidate[0].ugPassedYear!;
+      ugMarksTC.text = candidate[0].ugMarks!;
+      pgNameTC.text = candidate[0].pgName!;
+      pgCityTC.text = candidate[0].pgCity!;
+      pgPassedYearTC.text = candidate[0].pgPassedYear!;
+      pgMarksTC.text = candidate[0].pgMarks!;
+
     });
   }
-
+void _onItemTapped(int index) {
+  if(index == 0){
+ setState(
+                              () {
+                                 
+                                profileVisibility = true;
+                                _selectedIndex = index;
+                              },
+                            );
+  }else if(index == 2){setState(
+                              () {
+                                profileVisibility = false;
+                                 _selectedIndex = index;
+                              },
+                            );}
+    setState(() {
+      
+     
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    
     ScrollController _scrollController = ScrollController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -180,22 +220,49 @@ class _ProfileState extends State<Profile> {
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
+         bottomNavigationBar: BottomNavigationBar(
+    
+       items: [
+         new BottomNavigationBarItem(
+           icon: Icon(Icons.person_outline_rounded),
+
+           label: 'Details',
+         ),
+        
+        new BottomNavigationBarItem(
+          label: '',
+           icon: enabledStatus == false ? SizedBox(width:20,height:47) : TextButton(
+        style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(width, 20)),backgroundColor: MaterialStateProperty.all(Colors.blue), foregroundColor: MaterialStateProperty.all(Colors.white),padding: MaterialStateProperty.all(
+                      EdgeInsets.all(10)),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8.0),
+    )
+  )
+),
+       
+        
+        child: Text(
+         "Submit",
+          style: TextStyle(fontSize: 20.0),
+        ),
+     
+        onPressed: (){},
+      ),
+         ),
+         new BottomNavigationBarItem(
+           icon: Icon(Icons.table_view_rounded),
+           label: 'Skills',
+         ),
+        
+       ],
+         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+     ),
         appBar: customAppBarWidget(context, heading()),
-           floatingActionButton:    FloatingActionButton(onPressed: null, child:new Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[FloatingActionButton(
-  backgroundColor: Colors.blueAccent,
-  foregroundColor: Colors.white,
-  onPressed: () {
-    setState(
-                              () {
-                                profileVisibility = false;
-                              },
-                            );
-  },
-  child: Icon(Icons.arrow_upward_rounded),
-),FloatingActionButton(
-  backgroundColor: Colors.indigo[900],
+           floatingActionButton:    FloatingActionButton(
+  backgroundColor: Colors.blue,
   foregroundColor: Colors.white,
   onPressed: () {
    
@@ -205,7 +272,7 @@ class _ProfileState extends State<Profile> {
                                   curve: Curves.ease);
   },
   child: Icon(Icons.arrow_upward_rounded),
-),]),),
+),
         body: Container(
           child: SingleChildScrollView(
             controller: _scrollController,
@@ -218,21 +285,10 @@ class _ProfileState extends State<Profile> {
                   child: new Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        defaultButton(
-                          "Next Page",
-                          width,
-                          () {
-                            setState(
-                              () {
-                                profileVisibility = false;
-                              },
-                            );
-                          },
-                        ),
-                          defaultProfileSubHeadings(width, 'Basic User Info'),
+                     SizedBox(height:10),
                         defaultTextField(
                             context,
-                            'FirstName',
+                            'First Name',
                             Icon(Icons.person),
                             firstNameTC,
                             false,
@@ -240,7 +296,7 @@ class _ProfileState extends State<Profile> {
                             enabledStatus),
                         defaultTextField(
                             context,
-                            'LastName',
+                            'Last Name',
                             Icon(Icons.person),
                             lastNameTC,
                             false,
@@ -252,296 +308,91 @@ class _ProfileState extends State<Profile> {
                             mobileNumberTC, false, null, enabledStatus),
                         defaultTextField(context, 'Email ID', Icon(Icons.email),
                             emailIdTC, false, null, enabledStatus),
-                         defaultTextField(context, 'Mobilenumber', Icon(Icons.phone),
+                         defaultTextField(context, 'Mobile Number', Icon(Icons.phone),
                             mobileNumberTC, false, null, enabledStatus),
                          
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'City',
-                              prefixIcon: Icon(Icons.location_city),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: cityTC,
-                          ),
-                        ),
+                         defaultTextField(context, 'City', Icon(Icons.location_city),
+                            cityTC, false, null, enabledStatus),
+                            
                         SizedBox(
                           height: 10,
                         ),
                
-                        defaultProfileSubHeadings(width, 'School details'),
+                        defaultProfileSubHeadings(width, 'School Details'),
                         SizedBox(
                           height: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'School Name',
-                              prefixIcon: Icon(Icons.school_rounded),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: firstNameTC,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'School city',
-                              prefixIcon: Icon(Icons.location_on_sharp),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: firstNameTC,
-                          ),
-                        ),
+                      
+                        defaultTextField(context, 'School Name',Icon(Icons.school_rounded),
+                            schNameTC, false, null, enabledStatus),
+                      
+                        defaultTextField(context, 'School City',Icon(Icons.location_on_sharp),
+                            schCityTC, false, null, enabledStatus),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Expanded(
-                                  child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          40, 8, 8, 8),
-                                      child: Container(
-                                        width: 100.0,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.indigo[50],
-                                            labelText: 'passout year',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                          controller: emailIdTC,
-                                        ),
-                                      ))),
+                                  child:  defaultLeftSmallTextField(context, 'Passout Year', schPassedYearTC, false, null, enabledStatus),),
+                                     
                               Expanded(
-                                  child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          8, 8, 40, 8),
-                                      child: Container(
-                                        width: 100.0,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.indigo[50],
-                                            labelText: 'Marks',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                          controller: null,
-                                        ),
-                                      )))
+                                  child: defaultRightSmallTextField(context, 'Marks', schMarksTC, false, null, enabledStatus),),
                             ]),
                         SizedBox(
                           height: 10,
                         ),
                     
-                        defaultProfileSubHeadings(width, 'Graduation details'),
+                        defaultProfileSubHeadings(width, 'Graduation Details'),
                         SizedBox(
                           height: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'College Name',
-                              prefixIcon: Icon(Icons.school_rounded),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: null,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'College city',
-                              prefixIcon: Icon(Icons.location_on_sharp),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: null,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'Specialization',
-                              prefixIcon:
-                                  Icon(Icons.precision_manufacturing_outlined),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: null,
-                          ),
-                        ),
+                        
+                        defaultTextField(context, 'College Name',Icon(Icons.school_rounded),
+                            ugNameTC, false, null, enabledStatus),
+                        
+                        defaultTextField(context, 'College City',Icon(Icons.location_on_sharp),
+                            ugCityTC, false, null, enabledStatus),
+                        
+                        defaultTextField(context, 'Specialization',Icon(Icons.precision_manufacturing_outlined),
+                            ugSpecializationTC, false, null, enabledStatus),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
+                            Expanded(
+                                  child:  defaultLeftSmallTextField(context, 'Passout Year', ugPassedYearTC, false, null, enabledStatus),),
+                                     
                               Expanded(
-                                  child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          40, 8, 8, 8),
-                                      child: Container(
-                                        width: 100.0,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.indigo[50],
-                                            labelText: 'passout year',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                          controller: emailIdTC,
-                                        ),
-                                      ))),
-                              Expanded(
-                                  child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          8, 8, 40, 8),
-                                      child: Container(
-                                        width: 100.0,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.indigo[50],
-                                            labelText: 'Marks',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                          controller: emailIdTC,
-                                        ),
-                                      )))
+                                  child: defaultRightSmallTextField(context, 'Marks', ugMarksTC, false, null, enabledStatus),),
                             ]),
                         SizedBox(
                           height: 10,
                         ),
                       
-                        defaultProfileSubHeadings(width, 'Post Graduation details'),
+                        defaultProfileSubHeadings(width, 'Post Graduation Details'),
                         SizedBox(
                           height: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'College Name',
-                              prefixIcon: Icon(Icons.school_rounded),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: null,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'College city',
-                              prefixIcon: Icon(Icons.location_on_sharp),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: null,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 8, 40, 0),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.indigo[50],
-                              labelText: 'Specialization',
-                              prefixIcon:
-                                  Icon(Icons.precision_manufacturing_outlined),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                            ),
-                            controller: null,
-                          ),
-                        ),
+                        
+                        defaultTextField(context, 'College Name',Icon(Icons.school_rounded),
+                            pgNameTC, false, null, enabledStatus),
+                        
+                        defaultTextField(context, 'College City',Icon(Icons.location_on_sharp),
+                            pgCityTC, false, null, enabledStatus),
+                        
+                        defaultTextField(context, 'Specialization',Icon(Icons.precision_manufacturing_outlined),
+                            pgSpecializationTC, false, null, enabledStatus),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
+                               Expanded(
+                                  child:  defaultLeftSmallTextField(context, 'Passout Year', pgPassedYearTC, false, null, enabledStatus),),
+                                     
                               Expanded(
-                                  child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          40, 8, 8, 8),
-                                      child: Container(
-                                        width: 100.0,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.indigo[50],
-                                            labelText: 'passout year',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                          controller: emailIdTC,
-                                        ),
-                                      ))),
-                              Expanded(
-                                  child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          8, 8, 40, 8),
-                                      child: Container(
-                                        width: 100.0,
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: Colors.indigo[50],
-                                            labelText: 'Marks',
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                          ),
-                                          controller: emailIdTC,
-                                        ),
-                                      )))
+                                  child: defaultRightSmallTextField(context, 'Marks', pgMarksTC, false, null, enabledStatus),),
                             ]),
                         SizedBox(
                           height: 10,
                         ),
-                        MaterialButton(
-                          onPressed: () => {},
-                          child: GestureDetector(
-                            onTap: () {
-                              _scrollController.animateTo(
-                                  _scrollController.position.minScrollExtent,
-                                  duration: Duration(milliseconds: 500),
-                                  curve: Curves.ease);
-                            },
-                            child: goToTopText(),
-                          ),
-                        ),
+                       
                       ]),
                 ),
                 Visibility(
@@ -550,45 +401,267 @@ class _ProfileState extends State<Profile> {
                   child: new Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        defaultButton(
-                          "Go Back",
-                          width,
-                          () {
-                            setState(
-                              () {
-                                profileVisibility = true;
-                              },
-                            );
-                          },
-                        ),
+                     
                         SizedBox(
                           height: 10,
                         ),
-                        Divider(
-                          thickness: 2,
-                          indent: 20,
-                          endIndent: 20,
-                          color: Colors.black,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 40.0),
-                          child: Text(
-                            'Skills',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.normal),
-                          ),
-                        ),
+                    defaultSkillSubHeadings(width, 'Computation Skills', (){}),
                         SizedBox(
                           height: 10,
                         ),
-                        Visibility(
-                          visible: enabledStatus,
-                          child: defaultButton(
-                            "Submit Changes",
-                            width,
-                            () {},
-                          ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                           
+                              Padding(padding:EdgeInsets.only(left:20)),
+                      Expanded(child: DropdownButton<String>(
+  focusColor:Colors.grey,
+  value: _skillName1,
+  //elevation: 5,
+  style: TextStyle(color: Colors.grey,fontSize:20),
+  iconEnabledColor:Colors.black,
+  isExpanded: true,
+  items: <String>[
+    'Android',
+    'IOS',
+    'Flutter',
+    'Node',
+    'Java',
+    'Python',
+    'PHP',
+  ].map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,style:TextStyle(color:Colors.black),),
+    );
+  }).toList(),
+  hint:Text(
+    "",
+    style: TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+      _skillName1 = value!;
+    });
+  }),),
+   Container(margin: EdgeInsets.fromLTRB(8, 8, 20, 8),child:     DropdownButton<String>(
+  focusColor:Colors.grey,
+  value: _proficiencyLevel1,
+  //elevation: 5,
+  style: TextStyle(color: Colors.grey,fontSize:20),
+  iconEnabledColor:Colors.black,
+  items: <String>[
+    'Beginner',
+    'Intermediate',
+    'Advanced',
+  ].map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,style:TextStyle(color:Colors.black),),
+    );
+  }).toList(),
+  hint:Text(
+    "Select a skill",
+    style: TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+     _proficiencyLevel1 = value!;
+    });
+  }),)
+
+                            ]),
+                    
+                    
+                          SizedBox(
+                          height: 10,
                         ),
+               defaultSkillSubHeadings(width, 'Language Skills', (){}),
+                        SizedBox(
+                          height: 10,
+                        ),
+                            Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                           
+                              Padding(padding:EdgeInsets.only(left:20)),
+                      Expanded(child: DropdownButton<String>(
+  focusColor:Colors.grey,
+  value: _skillName2,
+  //elevation: 5,
+  style: TextStyle(color: Colors.grey,fontSize:20),
+  iconEnabledColor:Colors.black,
+  isExpanded: true,
+  items: <String>[
+    'Android',
+    'IOS',
+    'Flutter',
+    'Node',
+    'Java',
+    'Python',
+    'PHP',
+  ].map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,style:TextStyle(color:Colors.black),),
+    );
+  }).toList(),
+  hint:Text(
+    "",
+    style: TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+      _skillName2 = value!;
+    });
+  }),),
+   Container(margin: EdgeInsets.fromLTRB(8, 8, 20, 8),child:     DropdownButton<String>(
+  focusColor:Colors.grey,
+  value: _proficiencyLevel2,
+  //elevation: 5,
+  style: TextStyle(color: Colors.grey,fontSize:20),
+  iconEnabledColor:Colors.black,
+  items: <String>[
+    'Beginner',
+    'Intermediate',
+    'Advanced',
+  ].map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,style:TextStyle(color:Colors.black),),
+    );
+  }).toList(),
+  hint:Text(
+    "Select a skill",
+    style: TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+     _proficiencyLevel2 = value!;
+    });
+  }),)
+
+                            ]),
+                          SizedBox(
+                          height: 10,
+                        ),
+                     defaultSkillSubHeadings(width, 'OnJob Skills', (){ setState(() {
+                       Skill skill = new Skill();
+                       skill.candidateId = finalCandidate[0].candidateId!;
+                       skill.skillName = _skillName3;
+                       skill.proficiencyLevel = _proficiencyLevel3;
+                       skill.skillType = 'onJob';
+     onJobskills.add(skill);
+    });}),
+                        SizedBox(
+                          height: 10,
+                        ),
+                           Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                           
+                              Padding(padding:EdgeInsets.only(left:20)),
+                      Expanded(child: DropdownButton<String>(
+  focusColor:Colors.grey,
+  value: _skillName3,
+  //elevation: 5,
+  style: TextStyle(color: Colors.grey,fontSize:20),
+  iconEnabledColor:Colors.black,
+  isExpanded: true,
+  items: <String>[
+    'Android',
+    'IOS',
+    'Flutter',
+    'Node',
+    'Java',
+    'Python',
+    'PHP',
+  ].map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,style:TextStyle(color:Colors.black),),
+    );
+  }).toList(),
+  hint:Text(
+    "",
+    style: TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+      _skillName3 = value!;
+    });
+  }),),
+   Container(margin: EdgeInsets.fromLTRB(8, 8, 20, 8),child:     DropdownButton<String>(
+  focusColor:Colors.grey,
+  value: _proficiencyLevel3,
+  //elevation: 5,
+  style: TextStyle(color: Colors.grey,fontSize:20),
+  iconEnabledColor:Colors.black,
+  items: <String>[
+    'Beginner',
+    'Intermediate',
+    'Advanced',
+  ].map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,style:TextStyle(color:Colors.black),),
+    );
+  }).toList(),
+  hint:Text(
+    "Select a skill",
+    style: TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
+  ),
+  onChanged: (String? value) {
+    setState(() {
+     _proficiencyLevel3 = value!;
+    });
+  }),),
+ 
+
+                            ]),
+                            SizedBox(
+                          height: 10,
+                        ),
+                        ListView.builder(
+      itemCount: onJobskills.length,
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      itemBuilder: (BuildContext context, int index) {
+        return Dismissible(
+          child: ListTile(
+            title: Text(
+              'Item ${onJobskills[index]}',
+            ),
+          ),
+          background: Container(
+            color: Colors.green,
+          ),
+          key: ValueKey<int>(index),
+          onDismissed: (DismissDirection direction) {
+            setState(() {
+              onJobskills.remove(index);
+            });
+          },
+        );
+      },
+    ),
                       ]),
                 ),
               ],
@@ -598,3 +671,5 @@ class _ProfileState extends State<Profile> {
         drawer: customDrawerWidget(context, firstName));
   }
 }
+
+

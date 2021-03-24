@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:interview_app/pages/changePasswordSuccess.dart';
+import 'package:interview_app/pages/success_pages/changePasswordSuccess.dart';
 import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
 import 'package:interview_app/reusable_code_blocks/validation_functions.dart';
 import 'package:interview_app/reusable_code_blocks/gobalConstants.dart';
@@ -25,9 +25,9 @@ class _ChangePasswordState extends State<ChangePassword> {
     var url =
         Uri.http(SERVER_URL, "interview_app_phpfiles/change_password.php");
     var response = await http.post(url, body: {
-      "emailid": emailId!,
+      "emailId": emailId!,
       "password": password.text,
-      "latestupdatedtime": DateTime.now().toString(),
+      "latestUpdatedTime": DateTime.now().toString(),
     });
     var data = await json.decode(json.encode(response.body));
     if (data != "Success") {

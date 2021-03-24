@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:interview_app/pages/logIn.dart';
 import 'package:interview_app/reusable_code_blocks/logger_controller.dart';
 import 'package:interview_app/pages/dashBoard.dart';
-import 'package:interview_app/pages/logOutSuccess.dart';
+import 'package:interview_app/pages/success_pages/logOutSuccess.dart';
 import 'package:interview_app/pages/profile.dart';
 import 'package:interview_app/pages/register.dart';
 import 'package:interview_app/reusable_code_blocks/clickable_text.dart';
@@ -135,6 +135,39 @@ GestureDetector defaultSuccessPageLogInRedirection(BuildContext context) {
         ]),
   );
 }
+GestureDetector defaultLoginPageDashBoardRedirection(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LogIn(),
+        ),
+      );
+    },
+    child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "Click ",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "here ",
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.pink[900]),
+          ),
+          Text(
+            "to sign in",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+        ]),
+  );
+}
+
 
 void defaultSnackbar(BuildContext context, String warningMessage) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -195,100 +228,108 @@ PreferredSize defaultAppBarHeader(BuildContext context, String heading) {
 
 /// Returns the custom drawer widget
 
-
- Drawer customDrawerWidget(BuildContext contextInput, String? firstNameInput) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Align(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Image.asset('assets/images/avatar-placeholder.png',
-                      width: 80),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    firstNameInput!,
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 3.0,
-                        color: Colors.grey),
-                  ),
-                ],
+Drawer customDrawerWidget(BuildContext contextInput, String? firstNameInput) {
+  return Drawer(
+    child: Column(
+      children: <Widget>[
+        DrawerHeader(
+          child: Align(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                Image.asset('assets/images/avatar-placeholder.png', width: 80),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  firstNameInput!,
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 3.0,
+                      color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+          decoration: BoxDecoration(
+            color: Colors.indigo[900],
+          ),
+        ),
+        ListTile(
+          title: Text(
+            'Profile',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 3.0,
+                color: Colors.grey),
+          ),
+          onTap: () {
+            Navigator.push(
+              contextInput,
+              MaterialPageRoute(
+                builder: (context) => Profile(),
               ),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.indigo[900],
-            ),
+            );
+          },
+        ),
+        ListTile(
+          title: Text(
+            'Dashboard',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 3.0,
+                color: Colors.grey),
           ),
-          ListTile(
-            title: Text(
-              'Profile',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 3.0,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              Navigator.push(
-                contextInput,
-                MaterialPageRoute(
-                  builder: (context) => Profile(),
-                ),
-              );
-            },
+          onTap: () {
+            Navigator.push(
+              contextInput,
+              MaterialPageRoute(
+                builder: (context) => DashBoard(),
+              ),
+            );
+          },
+        ),
+        ListTile(
+          title: Text(
+            'Log Out',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 3.0,
+                color: Colors.grey),
           ),
-          ListTile(
-            title: Text(
-              'Dashboard',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 3.0,
-                  color: Colors.grey),
-            ),
-            onTap: () {
-              Navigator.push(
-                contextInput,
-                MaterialPageRoute(
-                  builder: (context) => DashBoard(),
-                ),
-              );
-            },
+          onTap: () async {
+            SharedPreferences preferences =
+                await SharedPreferences.getInstance();
+            preferences.setBool("isLoggedIn", false);
+            print(preferences.getBool("isLoggedIn"));
+            preferences.setString("loggedInEmailId", "");
+            Navigator.push(
+              contextInput,
+              MaterialPageRoute(
+                builder: (context) => LogOutSuccess(),
+              ),
+            );
+          },
+        ),
+        Expanded(
+          child: Align(
+            alignment: FractionalOffset.bottomLeft,
+            child: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text("copywrite information to be inserted here")),
           ),
-          ListTile(
-            title: Text(
-              'Log Out',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 3.0,
-                  color: Colors.grey),
-            ),
-            onTap: () async {
-              SharedPreferences preferences =
-                  await SharedPreferences.getInstance();
-              preferences.setBool("isLoggedIn", false);
-              print(preferences.getBool("isLoggedIn"));
-              preferences.setString("loggedInEmailId", "");
-              Navigator.push(
-                contextInput,
-                MaterialPageRoute(
-                  builder: (context) => LogOutSuccess(),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
+    ),
+  );
+}
 
 /// Returns the default text widget
 Padding defaultTextField(
@@ -318,6 +359,65 @@ Padding defaultTextField(
   );
 }
 
+Padding defaultLeftSmallTextField(
+  BuildContext contextInput,
+  String labelInput,
+  TextEditingController controllerInput,
+  bool obscureInput,
+  String? Function(String?)? validationInput,
+  bool enablationInput,
+) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(40, 8, 8, 8),
+    child: Container(
+      width: 100.0,
+      child: TextFormField(
+        obscureText: obscureInput,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.lightBlue[50],
+          labelText: labelInput,
+
+          border:
+              new OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        controller: controllerInput,
+        validator: validationInput,
+        enabled: enablationInput,
+      ),
+    ),
+  );
+}
+
+Padding defaultRightSmallTextField(
+  BuildContext contextInput,
+  String labelInput,
+  TextEditingController controllerInput,
+  bool obscureInput,
+  String? Function(String?)? validationInput,
+  bool enablationInput,
+) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(8, 8, 40, 8),
+    child: Container(
+      width: 100.0,
+      child: TextFormField(
+        obscureText: obscureInput,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.lightBlue[50],
+          labelText: labelInput,
+          border:
+              new OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        controller: controllerInput,
+        validator: validationInput,
+        enabled: enablationInput,
+      ),
+    ),
+  );
+}
+
 /// Returns the default button widget
 Container defaultButton(
     String label, double width, void Function()? onPressedInput) {
@@ -325,16 +425,22 @@ Container defaultButton(
     margin: EdgeInsets.fromLTRB(40, 8, 40, 0),
     child: ButtonTheme(
       minWidth: width,
-      child: FlatButton(
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(8.0)),
-        padding: EdgeInsets.all(10),
+      child: TextButton(
+        style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(width, 20)),backgroundColor: MaterialStateProperty.all(Colors.blue), foregroundColor: MaterialStateProperty.all(Colors.white),padding: MaterialStateProperty.all(
+                      EdgeInsets.all(10)),
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(8.0),
+    )
+  )
+),
+       
+        
         child: Text(
           label,
           style: TextStyle(fontSize: 20.0),
         ),
-        color: Colors.blueAccent,
-        textColor: Colors.white,
+     
         onPressed: onPressedInput,
       ),
     ),
@@ -356,18 +462,63 @@ GestureDetector defaultSignUpWidget(BuildContext context) {
   );
 }
 
+GestureDetector defaultSignInWidget(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LogIn(),
+        ),
+      );
+    },
+    child: regisSignInText(),
+  );
+}
 
-Container defaultProfileSubHeadings(double? widthInput, String headingInput){return   Container(
-                          alignment: Alignment.centerLeft,
-                          color: Colors.indigo[900],
-                          width: widthInput,
-                          height: 50,
-                          margin: const EdgeInsets.only(left:20,right:20),
-                          child: Padding(
-                          padding: const EdgeInsets.only(left: 40.0),
-                          child: Text(
-                            headingInput,
-                            style: TextStyle(color: Colors.white,
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ),);}
+Container defaultProfileSubHeadings(double? widthInput, String headingInput) {
+  return Container(
+    alignment: Alignment.centerLeft,
+    color: Colors.indigo[800],
+    width: widthInput,
+    height: 50,
+    margin: const EdgeInsets.only(left: 20, right: 20),
+    child: Padding(
+      padding: const EdgeInsets.only(left: 40.0),
+      child: Text(
+        headingInput,
+        style: TextStyle(
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    ),
+  );
+}
+
+Container defaultSkillSubHeadings(double widthInput,String headingInput, void Function()? onPressedInput){return   Container(
+    alignment: Alignment.centerLeft,
+    color: Colors.indigo[800],
+    width: widthInput,
+    height: 50,
+    margin: const EdgeInsets.only(left: 20, right: 20),
+    child: Row(children: [Padding(
+      padding: const EdgeInsets.only(left: 40.0),
+      child: Text(
+        headingInput,
+        style: TextStyle(
+            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+    ),Expanded(
+          child: Align(
+            alignment: FractionalOffset.centerRight,
+            child: Padding(padding: EdgeInsets.only(right:8), child:OutlinedButton(
+    child: Text('Add'),
+    style: OutlinedButton.styleFrom(
+      primary: Colors.green,
+      backgroundColor: Colors.white,
+      side: BorderSide(color: Colors.indigo[700]!, width: 5),
+    ),
+    onPressed: onPressedInput,
+  ),),
+          ),
+        ),],   )
+  );}

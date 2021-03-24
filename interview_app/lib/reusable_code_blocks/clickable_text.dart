@@ -1,33 +1,23 @@
 import 'package:flutter/material.dart';
 
-Row goToTopText() {
-  return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          "Go to",
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-        ),
-        RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: "Top",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.pink[900]),
-              ),
-              WidgetSpan(
-                alignment: PlaceholderAlignment.top,
-                child: Icon(Icons.arrow_upward_rounded, size: 14),
-              ),
-            ],
-          ),
-        )
-      ]);
-}
+
+Row regisSignInText(){return Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Already a member?",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            "Sign In",
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.pink[900]),
+                          )
+                        ]);}
 
 Row clickToSignInText() {
   return Row(

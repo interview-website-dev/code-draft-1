@@ -58,14 +58,69 @@ List<Candidate?>? finalCandidate;
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-    body: MainListView(),
-    drawer: customDrawerWidget(context, firstName),
-  );
+      
+      floatingActionButton:   FloatingActionButton(
+  backgroundColor: Colors.indigo[900],
+  foregroundColor: Colors.white,
+  onPressed: () {
+   
+
+     _scrollController.animateTo(
+                _scrollController.position.maxScrollExtent,
+                  duration: Duration(milliseconds: 500),
+                 curve: Curves.ease);
+  },
+  child: Icon(Icons.arrow_upward_rounded),
+),
+      appBar:
+          customAppBarWidget(context, defaultAppBarHeader(context, heading)),
+      body: MainListView(
+                  context: context,
+                ),
+      drawer: customDrawerWidget(context,firstName),
+      /*Center(
+        child: RaisedButton(
+          onPressed: () { 
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Profile(),
+              ),
+            );
+          },
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+          padding: EdgeInsets.all(0.0),
+          child: Ink(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.purple[100], Color(0xFFFFFF)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 50.0, maxHeight: 50.0),
+              alignment: Alignment.center,
+              child: Text(
+                "Edit profile",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.purple),
+              ),
+            ),
+          ),
+        ),
+      ),*/
+    );
   }
 }
 
 class MainListView extends StatefulWidget {
   MainListViewState createState() => MainListViewState();
+  final BuildContext context;
+  MainListView({required this.context});
 }
 
 class MainListViewState extends State {
@@ -95,36 +150,13 @@ class MainListViewState extends State {
 
   @override
   Widget build(context) {
-     double height = MediaQuery.of(context).size.height;
     return FutureBuilder<List<Post>>(
       future: fetchPosts(),
       builder: (context, snapshot) {
         if (!snapshot.hasData)
           return Center(child: CircularProgressIndicator());
 
-        return CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-
-  backgroundColor: Colors.white,
-              iconTheme: IconThemeData(color: Colors.black),
-              pinned: true,
-              snap: true,
-              floating: true,
-              expandedHeight: 160.0,
-              flexibleSpace: FlexibleSpaceBar(
-                title:  SABT(
-                child: Text("hiii")),
-                background: freeFloatingLogo(),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Center(
-                child: Container(
-                  height: height,
-                  alignment: Alignment.topCenter,
-                  padding: const EdgeInsets.only(top:10),
-                  child: ListView(
+        return ListView(
               controller: _scrollController,
               reverse: true,
               shrinkWrap: true,
@@ -269,65 +301,9 @@ class MainListViewState extends State {
                         ],
                       ))
                   .toList(),
-            ),
-                ),
-              ),
-            ),
-          ],
-        );
+            );
           
       },
-    );
-  }
-}
-class SABT extends StatefulWidget {
-  final Widget child;
-  const SABT({
-   Key? key,
-    required this.child,
-  }) : super(key: key);
-  @override
-  _SABTState createState() {
-    return new _SABTState();
-  }
-}
-class _SABTState extends State<SABT> {
-  ScrollPosition? _position;
-  bool? _visible;
-  @override
-  void dispose() {
-    _removeListener();
-    super.dispose();
-  }
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _removeListener();
-    _addListener();
-  }
-  void _addListener() {
-    _position = Scrollable.of(context)!.position;
-    _position?.addListener(_positionListener);
-    _positionListener();
-  }
-  void _removeListener() {
-    _position?.removeListener(_positionListener);
-  }
-  void _positionListener() {
-    final FlexibleSpaceBarSettings settings =
-      context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
-    bool visible = settings == null || settings.currentExtent <= settings.minExtent;
-    if (_visible != visible) {
-      setState(() {
-        _visible = visible;
-      });
-    }
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Visibility(
-      visible: _visible!,
-      child: widget.child,
     );
   }
 }

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:interview_app/pages/loggerPageRedirection.dart';
 import 'package:interview_app/reusable_code_blocks/strut_widgets.dart';
 import 'package:interview_app/reusable_code_blocks/validation_functions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,11 +17,38 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  bool checker = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailId = TextEditingController();
   TextEditingController password = TextEditingController();
-
+ void initState() {
+    getValidationData().whenComplete(
+      () async {
+      
+       if( checker == true){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoggerPageRedirection(),
+                  ),
+                );
+       }
+      },
+    );
+   
+   super.initState();
+  }
+ Future getValidationData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var obtainedBool = preferences.getBool("isLoggedIn") ?? false;
+    setState(
+      () {
+        checker = obtainedBool;
+      },
+    );
+    print(checker);
+  }
   Future login(BuildContext context) async {
     var url = Uri.http(SERVER_URL, "interview_app_phpfiles/login.php");
     var response = await http.post(url, body: {
